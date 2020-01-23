@@ -19,60 +19,96 @@ import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private EditText etfname,etlname, etaddress,etphone,etemail,etusername,etpassword;
-    private Button signup;
-    private TextView login;
+        private EditText etfname, etlname, etaddress, etphno, etemail, etusername,etpassword, etconfirmpass;
+        private Button btnsignup;
+        private TextView tvlogin;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        etfname = findViewById(R.id.fname);
-        etlname = findViewById(R.id.lname);
-        etaddress = findViewById(R.id.address);
-        etphone = findViewById(R.id.phone);
-        etemail = findViewById(R.id.email);
-        etusername = findViewById(R.id.username);
-        etpassword = findViewById(R.id.password);
-        signup= findViewById(R.id.btn_signup);
-        login = findViewById(R.id.tvlogin);
+        etfname=findViewById(R.id.fname);
+        etlname=findViewById(R.id.lname);
+        etaddress=findViewById(R.id.address);
+        etphno=findViewById(R.id.phone);
+        etemail=findViewById(R.id.email);
+        etusername=findViewById(R.id.susername);
+        etpassword=findViewById(R.id.spassword);
+        etconfirmpass=findViewById(R.id.cpassword);
+        btnsignup=findViewById(R.id.btn_signup);
+        tvlogin=findViewById(R.id.tvlogin);
 
-        login.setOnClickListener(new View.OnClickListener() {
+        tvlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(SignupActivity.this, LoginActivity.class);
+                Intent i= new Intent(SignupActivity.this, LoginActivity.class );
                 startActivity(i);
             }
-        });
+            });
 
-        signup.setOnClickListener(new View.OnClickListener() {
+        btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user= new User(etfname.getText().toString(), etlname.getText().toString(), etaddress.getText().toString(), etphone.getText().toString(), etemail.getText().toString(), etusername.getText().toString(), etpassword.getText().toString());
-                API api= URL.getInstance().create(API.class);
-                Call<Void> call= api.register(user);
-
-                call.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if(!response.isSuccessful()){
-                            Toast.makeText(SignupActivity.this, "Unable to register"+ response.message(), Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        Intent i= new Intent(SignupActivity.this, MainActivity.class);
-                        startActivity(i);
+                if(etpassword.getText().toString().equals(etconfirmpass.getText().toString())){
+                    if(validate()){
+                        signup();
                     }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        Toast.makeText(SignupActivity.this, "Error"+t.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
-
-                    }
-                });
+                } else{
+                    Toast.makeText(SignupActivity.this, "Password does not match", Toast.LENGTH_SHORT).show();
+                etpassword.requestFocus();
+                        return;
+                }
             }
         });
+    }
+
+    private void signup() {
+
+        String fname= etfname.getText().toString();
+        String lname=etlname.getText().toString();
+        String address= etaddress.getText().toString();
+        String phone= etphno.getText().toString();
+        String email= etemail.getText().toString();
+        String username= etusername.getText().toString();
+        String password= etpassword.getText().toString();
+
+        User regUser=new User(fname,lname,address,phone,email,username,password);
+
+        API api=URL.getInstance().create(API.class);
+            Call<Void> call=api.register(regUser);
+
+            call.enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (!response.isSuccessful()) {
+                        Toast.makeText(SignupActivity.this, "Code " + response.code(), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Toast.makeText(SignupActivity.this, "Registered", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+                    Toast.makeText(SignupActivity.this, "Error" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
+
 
 
     }
+
+    private boolean validate(){
+boolean status=true;
+if(etusername.getText().toString().length()<6){
+etusername.setError("Min 6 character");
+status=false;
+}
+
+return status;
+}
+
+
 }

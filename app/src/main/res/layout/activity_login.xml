@@ -117,20 +117,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/footer_line" />
 
-    <TextView
-        android:id="@+id/facebook_login"
-        android:layout_width="wrap_content"
+    <com.shaishavgandhi.loginbuttons.GooglePlusButton
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:drawablePadding="8dp"
-        android:text="Login with Facebook"
-        android:textColor="@color/login_form_details"
-        android:textSize="20sp"
-        android:layout_marginTop="10sp"
         app:layout_constraintBottom_toTopOf="@id/footer_line"
         app:layout_constraintEnd_toStartOf="@id/guideline_right"
         app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintStart_toStartOf="@id/guideline_left" />
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/forgot_password"
+        android:id="@+id/btnGG"
+        android:text="Sign in with Google"
+        />
+
 
     <View
         android:id="@+id/line1"
@@ -139,7 +137,7 @@
         android:background="@color/login_form_details_medium"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/forgot_password"
-        app:layout_constraintBottom_toTopOf="@id/facebook_login"
+        app:layout_constraintBottom_toTopOf="@id/btnGG"
         app:layout_constraintEnd_toStartOf="@id/or"
         app:layout_constraintHorizontal_chainStyle="spread_inside"/>
 

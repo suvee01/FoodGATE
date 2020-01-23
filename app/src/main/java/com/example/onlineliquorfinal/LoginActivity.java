@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText et1,et2;
     private Button login;
-    private TextView LoginWithfb;
+    private TextView LoginWithGG;
     private TextView signup, forgetpassword;
 
     @Override
@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         et1 = findViewById(R.id.username);
         et2 = findViewById(R.id.password);
         login = findViewById(R.id.btn_login);
-        LoginWithfb=findViewById(R.id.facebook_login);
+        LoginWithGG=findViewById(R.id.btnGG);
         signup=findViewById(R.id.tvsignup);
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -47,13 +47,13 @@ public class LoginActivity extends AppCompatActivity {
                 public void onClick(View v) {
                         User user= new User(et1.getText().toString(), et2.getText().toString());
                     API api= URL.getInstance().create(API.class);
-                    Call<Void>call=api.login(user);
+                    Call<Void>call= api.login(user);
 
                     call.enqueue(new Callback<Void>() {
                         @Override
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if(!response.isSuccessful()){
-                                Toast.makeText(LoginActivity.this, "Login error"+ response.message(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Login error" + response.message(), Toast.LENGTH_SHORT).show();
                                 return;
                             }
                             Intent i= new Intent(LoginActivity.this, MainActivity.class);

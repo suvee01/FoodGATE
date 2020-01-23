@@ -1,37 +1,36 @@
 package Model;
 
 public class User {
-
-    private int image;
-    private String name, address, email, phone, username, password;
-
-    public User(String toString, String s) {
+    private String firstName, lastName, address, phoneno, email, username, password;
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-
-
-    public User(String s1, String string, String toString, String s, String email, String username, String password) {
+    public User(String firstName, String lastName, String address, String phoneno, String email, String username, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.phoneno = phoneno;
         this.email = email;
         this.username = username;
         this.password = password;
     }
 
-    public int getImage() {
-        return image;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getAddress() {
@@ -42,20 +41,20 @@ public class User {
         this.address = address;
     }
 
+    public String getPhoneno() {
+        return phoneno;
+    }
+
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getUsername() {
@@ -72,5 +71,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    @Override
+    public String toString() {
+        return "User{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneno='" + phoneno + '\'' +
+                ", email='" + email + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
