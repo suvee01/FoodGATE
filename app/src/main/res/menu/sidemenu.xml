@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/home" android:title="Home" />
-    <item android:id="@+id/Category" android:title="Category" />
-    <item android:id="@+id/Login" android:title="Login" />
-    <item android:id="@+id/Register" android:title="Register" />
+    <item android:id="@+id/home" android:title="Home" android:icon="@drawable/ic_dashboard_black_24dp"/>
+    <item android:id="@+id/Category" android:title="Category" android:icon="@drawable/ic_format_list_bulleted_black_24dp" />
+    <item android:id="@+id/Login" android:title="Login" android:icon="@drawable/ic_check_black_24dp"/>
+    <item android:id="@+id/Register" android:title="Register" android:icon="@drawable/ic_person_add_black_24dp"/>
+
 
 
 </menu>
