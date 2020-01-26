@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".DashboardActivity"
     android:id="@+id/drawyerlayout">
+
+
     
     <com.google.android.material.navigation.NavigationView
         app:headerLayout="@layout/header"
@@ -15,6 +17,8 @@
         app:menu="@menu/sidemenu"
         android:layout_gravity="start"
         />
+
+
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
