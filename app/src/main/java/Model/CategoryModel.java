@@ -2,19 +2,19 @@ package Model;
 
 public class CategoryModel {
 
-    private String Cat_img;
+    private int Cat_img;
     private String Cat_name;
 
-    public CategoryModel(String cat_img, String cat_name) {
+    public CategoryModel(int cat_img, String cat_name) {
         Cat_img = cat_img;
         Cat_name = cat_name;
     }
 
-    public String getCat_img() {
+    public int getCat_img() {
         return Cat_img;
     }
 
-    public void setCat_img(String cat_img) {
+    public void setCat_img(int cat_img) {
         Cat_img = cat_img;
     }
 

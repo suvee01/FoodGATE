@@ -1,5 +1,6 @@
 package Adapter;
 
+import android.content.Context;
 import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +19,11 @@ import Model.CategoryModel;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
-    private List<CategoryModel> categoryModelList;
+    Context mContext;
+     List<CategoryModel> categoryModelList;
 
-    public CategoryAdapter(List<CategoryModel> categoryModelList) {
+    public CategoryAdapter(Context context, List<CategoryModel> categoryModelList) {
+        this.mContext= mContext;
         this.categoryModelList = categoryModelList;
     }
 
@@ -36,9 +39,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder viewHolder, int position) {
 
-        String icon= categoryModelList.get(position).getCat_img();
-        String name= categoryModelList.get(position).getCat_name();
-        ViewHolder.setcCategory_name(name);
+       CategoryModel pc=categoryModelList.get(position);
+        viewHolder.category_icon.setImageResource(pc.getCat_img());
+
 
     }
 
@@ -55,8 +58,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            category_icon= itemView.findViewById(R.id.cat_icon);
-            category_name=itemView.findViewById(R.id.cat_name);
+            category_icon= itemView.findViewById(R.id.catimage);
+            category_name=itemView.findViewById(R.id.catname);
         }
 
         public static void setcCategory_name(String name) {

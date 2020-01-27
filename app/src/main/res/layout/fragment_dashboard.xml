@@ -6,9 +6,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
 
     <EditText
         android:id="@+id/src"
@@ -26,6 +29,7 @@
         android:padding="10dp" />
 
     <TextView
+        android:id="@+id/txtcat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Categories"
@@ -40,12 +44,9 @@
         android:id="@+id/cat_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
         android:elevation="3dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@id/txtcat"
+         />
 
     <RelativeLayout
         android:id="@+id/relaative"
@@ -66,6 +67,7 @@
     </RelativeLayout>
 
 <androidx.recyclerview.widget.RecyclerView
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/recyproduct"

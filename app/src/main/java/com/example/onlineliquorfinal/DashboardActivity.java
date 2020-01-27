@@ -14,11 +14,20 @@ import android.widget.FrameLayout;
 
 import com.example.onlineliquorfinal.Fragment.DashboardFragment;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
+import Model.CategoryModel;
+import Model.ProductModel;
+
 public class DashboardActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
     private ActionBarDrawerToggle mToggle;
     private FrameLayout frameLayout;
+    public static List<CategoryModel> lstcat= new ArrayList<>();
+    public static List<ProductModel> lstproduct = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +41,18 @@ public class DashboardActivity extends AppCompatActivity {
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
+
+        lstcat=new ArrayList<>();
+        lstcat.add(new CategoryModel(R.drawable.logo2,"Beer"));
+        lstcat.add(new CategoryModel(R.drawable.logo5,"Whiskey"));
+        lstcat.add(new CategoryModel(R.drawable.logo5,"Rum"));
+
+        lstproduct=new ArrayList<>();
+        lstproduct.add(new ProductModel(R.drawable.logo5,"Beer"));
+        lstproduct.add(new ProductModel(R.drawable.logo5,"Whiskey"));
+        lstproduct.add(new ProductModel(R.drawable.logo5,"Rum"));
+
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         frameLayout=findViewById(R.id.framelayout);

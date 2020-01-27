@@ -18,7 +18,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Adapter.CategoryAdapter;
+import Adapter.ProductAdapter;
 import Model.CategoryModel;
+import Model.ProductModel;
+
+import static com.example.onlineliquorfinal.DashboardActivity.lstcat;
+import static com.example.onlineliquorfinal.DashboardActivity.lstproduct;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -31,9 +36,9 @@ public class DashboardFragment extends Fragment {
     public DashboardFragment() {
         // Required empty public constructor
     }
-    private RecyclerView cat_recyclerview;
+    private RecyclerView cat_recyclerview, rv_product;
 
-    private CategoryAdapter categoryAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,25 +46,20 @@ public class DashboardFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_dashboard, container, false);
         cat_recyclerview= view.findViewById(R.id.cat_recyclerview);
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        cat_recyclerview.setLayoutManager(layoutManager);
+        rv_product= view.findViewById(R.id.recyproduct);
 
-        List<CategoryModel> categoryModelList= new ArrayList<CategoryModel>();
-        categoryModelList.add(new CategoryModel("Categoryimage","Beer"));
-        categoryModelList.add(new CategoryModel("Categoryimage","Whiskey"));
-        categoryModelList.add(new CategoryModel("Categoryimage","Vodka"));
-        categoryModelList.add(new CategoryModel("Categoryimage","Rum"));
-        categoryModelList.add(new CategoryModel("Categoryimage","Tequilla"));
-        categoryModelList.add(new CategoryModel("Categoryimage","Tequilla"));
-        categoryModelList.add(new CategoryModel("Categoryimage","Tequilla"));
-        categoryModelList.add(new CategoryModel("Categoryimage","Tequilla"));
+        CategoryAdapter categoryAdapter= new CategoryAdapter(getContext(),lstcat);
+        cat_recyclerview.setAdapter(categoryAdapter);
+        cat_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
 
-        categoryAdapter= new CategoryAdapter(categoryModelList);
-            cat_recyclerview.setAdapter(categoryAdapter);
-            categoryAdapter.notifyDataSetChanged();
+        ProductAdapter productAdapter= new ProductAdapter(getContext(),lstproduct);
+        rv_product.setAdapter(productAdapter);
+        rv_product.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+
 
         return view;
+
+
     }
 
 }
