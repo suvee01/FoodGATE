@@ -22,7 +22,7 @@
         android:id="@+id/product_img_id"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:shape="square"
+        android:shape="rectangle"
         android:scaleType="centerCrop"
         />
 

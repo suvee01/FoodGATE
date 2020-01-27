@@ -29,7 +29,7 @@ public class DashboardActivity extends AppCompatActivity {
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        frameLayout=findViewById(R.id.drawyerlayout);
+        frameLayout=findViewById(R.id.framelayout);
         setFragment(new DashboardFragment());
     }
 
