@@ -1,14 +1,18 @@
 package Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineliquorfinal.Fragment.ProductdetailFragment;
 import com.example.onlineliquorfinal.R;
 
 import java.util.List;
@@ -34,9 +38,27 @@ this.lstproduct=lstproduct;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, final int position) {
+
+
         ProductModel res=lstproduct.get(position);
-        holder.imgpro.setImageResource(res.getProductimg());
+
+        holder.productname.setText(lstproduct.get(position).getProductname());
+        holder.productdesc.setText(lstproduct.get(position).getProductdesc());
+        holder.imgpro.setImageResource(lstproduct.get(position).getProductimg());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent= new Intent(mcontext, ProductdetailFragment.class);
+
+                intent.putExtra("Name",lstproduct.get(position).getProductname());
+                intent.putExtra("Description",lstproduct.get(position).getProductdesc());
+                intent.putExtra("Image",lstproduct.get(position).getProductimg());
+
+                mcontext.startActivity(intent);
+            }
+        });
 
     }
 
@@ -48,10 +70,18 @@ this.lstproduct=lstproduct;
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
                 ImageView imgpro;
+                TextView productname;
+                CardView cardView;
+                TextView productdesc;
+
 
     public ProductViewHolder(View itemView){
         super(itemView);
+
+        productname=itemView.findViewById(R.id.product_name_id);
+        productdesc=itemView.findViewById(R.id.product_desc_id);
         imgpro= itemView.findViewById(R.id.product_img_id);
+        cardView=itemView.findViewById(R.id.cardview);
 
     }
     }

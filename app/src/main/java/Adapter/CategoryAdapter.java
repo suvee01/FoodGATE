@@ -41,6 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
        CategoryModel pc=categoryModelList.get(position);
         viewHolder.category_icon.setImageResource(pc.getCat_img());
+        viewHolder.category_name.setText(categoryModelList.get(position).getCat_name());
 
 
     }
@@ -70,6 +71,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         }
 
         private void setcategory_name(String name){
+
             category_name.setText(name);
         }
     }

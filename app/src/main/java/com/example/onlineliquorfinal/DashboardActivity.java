@@ -9,11 +9,15 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 
+import com.example.onlineliquorfinal.Fragment.CartFragment;
 import com.example.onlineliquorfinal.Fragment.DashboardFragment;
 
 import java.lang.reflect.Array;
@@ -32,6 +36,7 @@ public class DashboardActivity extends AppCompatActivity {
     public static List<CategoryModel> lstcat= new ArrayList<>();
     public static List<ProductModel> lstproduct = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
+    ImageView carticon;
     private RecyclerView rv_product;
 
     @Override
@@ -42,6 +47,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         mDrawerLayout= (DrawerLayout) findViewById(R.id.drawyerlayout);
         Toolbar toolbar = findViewById(R.id.app_bar);
+        carticon=findViewById(R.id.carticon);
         mToggle= new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open,R.string.close);
 
         mDrawerLayout.addDrawerListener(mToggle);
@@ -53,19 +59,27 @@ public class DashboardActivity extends AppCompatActivity {
         lstcat.add(new CategoryModel(R.drawable.ruslan,"Rum"));
 
         lstproduct=new ArrayList<>();
-        lstproduct.add(new ProductModel(R.drawable.beer,"Beer"));
-        lstproduct.add(new ProductModel(R.drawable.sig,"Whiskey"));
-        lstproduct.add(new ProductModel(R.drawable.ruslan,"Rum"));
-        lstproduct.add(new ProductModel(R.drawable.goak,"Golden Oak"));
-        lstproduct.add(new ProductModel(R.drawable.oak,"Black OAK"));
-        lstproduct.add(new ProductModel(R.drawable.rum,"Khukuri"));
-        lstproduct.add(new ProductModel(R.drawable.ruslan,"Rum"));
+        lstproduct.add(new ProductModel(R.drawable.beer,"Beer","70ml",70));
+        lstproduct.add(new ProductModel(R.drawable.sig,"Whiskey","70ml",80));
+        lstproduct.add(new ProductModel(R.drawable.ruslan,"Rum","70ml",80));
+        lstproduct.add(new ProductModel(R.drawable.goak,"Golden Oak","70ml",80));
+        lstproduct.add(new ProductModel(R.drawable.oak,"Black OAK","70ml",80));
+        lstproduct.add(new ProductModel(R.drawable.rum,"Khukuri","70ml",80));
+        lstproduct.add(new ProductModel(R.drawable.ruslan,"Rum","70ml",80));
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         frameLayout=findViewById(R.id.framelayout);
         setFragment(new DashboardFragment());
+
+        carticon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(DashboardActivity.this,CartFragment.class);
+                startActivity(i);
+            }
+        });
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
@@ -73,7 +87,9 @@ public class DashboardActivity extends AppCompatActivity {
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
+
 
     }
 
