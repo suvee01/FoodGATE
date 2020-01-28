@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +20,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+import Adapter.ProductAdapter;
 import Model.CategoryModel;
 import Model.ProductModel;
 
@@ -28,6 +31,8 @@ public class DashboardActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
     public static List<CategoryModel> lstcat= new ArrayList<>();
     public static List<ProductModel> lstproduct = new ArrayList<>();
+    RecyclerView.LayoutManager layoutManager;
+    private RecyclerView rv_product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +48,18 @@ public class DashboardActivity extends AppCompatActivity {
         mToggle.syncState();
 
         lstcat=new ArrayList<>();
-        lstcat.add(new CategoryModel(R.drawable.logo2,"Beer"));
-        lstcat.add(new CategoryModel(R.drawable.logo5,"Whiskey"));
-        lstcat.add(new CategoryModel(R.drawable.logo5,"Rum"));
+        lstcat.add(new CategoryModel(R.drawable.beer,"Beer"));
+        lstcat.add(new CategoryModel(R.drawable.sig,"Whiskey"));
+        lstcat.add(new CategoryModel(R.drawable.ruslan,"Rum"));
 
         lstproduct=new ArrayList<>();
-        lstproduct.add(new ProductModel(R.drawable.logo5,"Beer"));
-        lstproduct.add(new ProductModel(R.drawable.logo5,"Whiskey"));
-        lstproduct.add(new ProductModel(R.drawable.logo5,"Rum"));
+        lstproduct.add(new ProductModel(R.drawable.beer,"Beer"));
+        lstproduct.add(new ProductModel(R.drawable.sig,"Whiskey"));
+        lstproduct.add(new ProductModel(R.drawable.ruslan,"Rum"));
+        lstproduct.add(new ProductModel(R.drawable.goak,"Golden Oak"));
+        lstproduct.add(new ProductModel(R.drawable.oak,"Black OAK"));
+        lstproduct.add(new ProductModel(R.drawable.rum,"Khukuri"));
+        lstproduct.add(new ProductModel(R.drawable.ruslan,"Rum"));
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

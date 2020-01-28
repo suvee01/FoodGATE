@@ -4,6 +4,7 @@ package com.example.onlineliquorfinal.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -40,6 +41,7 @@ public class DashboardFragment extends Fragment {
 
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,13 +50,14 @@ public class DashboardFragment extends Fragment {
         cat_recyclerview= view.findViewById(R.id.cat_recyclerview);
         rv_product= view.findViewById(R.id.recyproduct);
 
+
         CategoryAdapter categoryAdapter= new CategoryAdapter(getContext(),lstcat);
         cat_recyclerview.setAdapter(categoryAdapter);
         cat_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
 
         ProductAdapter productAdapter= new ProductAdapter(getContext(),lstproduct);
         rv_product.setAdapter(productAdapter);
-        rv_product.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+        rv_product.setLayoutManager(new GridLayoutManager(getContext(),3));
 
 
         return view;
