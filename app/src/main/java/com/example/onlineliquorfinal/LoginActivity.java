@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private TextView LoginWithGG;
     private TextView signup, forgetpassword;
+    Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,8 @@ public class LoginActivity extends AppCompatActivity {
                         public void onResponse(Call<Void> call, Response<Void> response) {
                             if(!response.isSuccessful()){
                                 Toast.makeText(LoginActivity.this, "Login error" + response.message(), Toast.LENGTH_SHORT).show();
+                                vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);
+                                vibrator.vibrate(50);
                                 return;
                             }
                             Intent i= new Intent(LoginActivity.this, DashboardActivity.class);
