@@ -4,10 +4,12 @@ package com.example.onlineliquorfinal.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.onlineliquorfinal.R;
 
@@ -15,6 +17,9 @@ import com.example.onlineliquorfinal.R;
  * A simple {@link Fragment} subclass.
  */
 public class ProductdetailFragment extends Fragment {
+
+    RecyclerView recy_cart;
+    Button btn_pro_order;
 
 
     public ProductdetailFragment() {
@@ -27,6 +32,8 @@ public class ProductdetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_productdetail, container, false);
+
+
     }
 
 }

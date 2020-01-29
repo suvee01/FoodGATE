@@ -17,7 +17,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.example.onlineliquorfinal.Fragment.CartFragment;
 import com.example.onlineliquorfinal.Fragment.DashboardFragment;
 
 import java.lang.reflect.Array;
@@ -36,7 +35,7 @@ public class DashboardActivity extends AppCompatActivity {
     public static List<CategoryModel> lstcat= new ArrayList<>();
     public static List<ProductModel> lstproduct = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
-    ImageView carticon;
+
     private RecyclerView rv_product;
 
     @Override
@@ -47,7 +46,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         mDrawerLayout= (DrawerLayout) findViewById(R.id.drawyerlayout);
         Toolbar toolbar = findViewById(R.id.app_bar);
-        carticon=findViewById(R.id.carticon);
+
         mToggle= new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open,R.string.close);
 
         mDrawerLayout.addDrawerListener(mToggle);
@@ -72,14 +71,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         frameLayout=findViewById(R.id.framelayout);
         setFragment(new DashboardFragment());
-
-        carticon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(DashboardActivity.this,CartFragment.class);
-                startActivity(i);
-            }
-        });
     }
 
     public boolean onOptionsItemSelected(MenuItem item){

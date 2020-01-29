@@ -4,13 +4,15 @@ public class ProductModel {
 private int productimg;
 private String productname;
 private String productdesc;
-private int rate;
+public int rate;
 
     public ProductModel(int productimg, String productname, String productdesc, int rate) {
         this.productimg = productimg;
         this.productname = productname;
         this.productdesc = productdesc;
         this.rate = rate;
+
+
     }
 
     public int getProductimg() {
