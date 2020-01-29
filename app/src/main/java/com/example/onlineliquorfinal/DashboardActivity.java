@@ -7,30 +7,23 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 
 import com.example.onlineliquorfinal.Fragment.AccountFragment;
 import com.example.onlineliquorfinal.Fragment.CartFragment;
 import com.example.onlineliquorfinal.Fragment.DashboardFragment;
 import com.google.android.material.navigation.NavigationView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-import Adapter.ProductAdapter;
 import Model.CategoryModel;
 import Model.ProductModel;
 
@@ -40,6 +33,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     Fragment selectedFragment=null;
     private ActionBarDrawerToggle mToggle;
     private FrameLayout frameLayout;
+
     public static List<CategoryModel> lstcat= new ArrayList<>();
     public static List<ProductModel> lstproduct = new ArrayList<>();
     RecyclerView.LayoutManager layoutManager;
@@ -90,26 +84,16 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         frameLayout=findViewById(R.id.framelayout);
         setFragment(new DashboardFragment());
     }
-
-
-
     public boolean onOptionsItemSelected(MenuItem item){
         if(mToggle.onOptionsItemSelected(item)){
             return true;
         }
         return super.onOptionsItemSelected(item);
-
-
-
     }
-
-
-
     public void setFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(frameLayout.getId(),fragment);
         fragmentTransaction.commit();
-
     }
 
     @Override
@@ -124,13 +108,12 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             break;
 
             case R.id.Cart:
-                getSupportFragmentManager().beginTransaction().replace(R.id.cartframelayout,new CartFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new CartFragment()).commit();
                 break;
             case  R.id.Account:
-                getSupportFragmentManager().beginTransaction().replace(R.id.aframelayout,new AccountFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new AccountFragment()).commit();
                 break;
         }
-
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
