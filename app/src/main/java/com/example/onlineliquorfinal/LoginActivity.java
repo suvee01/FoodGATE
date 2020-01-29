@@ -76,6 +76,13 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
             });
+
+            LoginWithGG.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(LoginActivity.this,"You have clicked on Google Login",Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
 //
