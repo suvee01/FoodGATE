@@ -18,7 +18,7 @@
             android:gravity="center"
             android:orientation="vertical">
             <ImageView
-                android:id="@+id/productdetails"
+                android:id="@+id/productimg"
                 android:layout_width="125dp"
                 android:layout_height="170dp"
                 android:background="@color/orange"

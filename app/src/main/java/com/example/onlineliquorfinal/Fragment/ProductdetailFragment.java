@@ -18,8 +18,7 @@ import com.example.onlineliquorfinal.R;
  */
 public class ProductdetailFragment extends Fragment {
 
-    RecyclerView recy_cart;
-    Button btn_pro_order;
+
 
 
     public ProductdetailFragment() {
