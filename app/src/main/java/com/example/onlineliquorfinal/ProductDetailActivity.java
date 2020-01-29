@@ -14,35 +14,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.onlineliquorfinal.Fragment.DashboardFragment;
-import com.example.onlineliquorfinal.Fragment.ProductdetailFragment;
-
 public class ProductDetailActivity extends AppCompatActivity {
-    private DrawerLayout mDrawerLayout;
-    private Toolbar toolbar;
-    private ActionBarDrawerToggle mToggle;
-    private FrameLayout frameLayout;
-    private TextView productname, product_desc;
-    private ImageView image;
-    private TextView rate;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
-        mDrawerLayout= (DrawerLayout) findViewById(R.id.drawyerlayout);
-        Toolbar toolbar = findViewById(R.id.app_bar);
-
-        mToggle= new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open,R.string.close);
-
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
+        frameLayout=findViewById(R.id.pframelayout);
+        setFragment(new ProductdetailFragment());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        frameLayout=findViewById(R.id.pframelayout);
-        /*setFragment(new ProductdetailFragment());
 
         productname=(TextView)findViewById(R.id.txtname);
         product_desc=(TextView)findViewById(R.id.prodesc);

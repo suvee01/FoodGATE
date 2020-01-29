@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.onlineliquorfinal.Fragment.ProductdetailFragment;
 import com.example.onlineliquorfinal.R;
 
 import java.util.List;
