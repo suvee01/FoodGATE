@@ -46,6 +46,13 @@ public class DashboardActivity extends AppCompatActivity {
 
         mDrawerLayout= (DrawerLayout) findViewById(R.id.drawyerlayout);
         Toolbar toolbar = findViewById(R.id.app_bar);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i =new Intent(DashboardActivity.this,CartActivity.class);
+                startActivity(i);
+            }
+        });
 
         mToggle= new ActionBarDrawerToggle(this, mDrawerLayout, toolbar,R.string.open,R.string.close);
 

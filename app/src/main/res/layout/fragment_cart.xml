@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:background="@color/lightorange"
+    tools:context=".Fragment.CartFragment">
+
+
+    <Button
+        android:id="@+id/btnplaceorder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="43dp"
+        android:background="@color/yellow"
+        android:text="Place Order"
+        android:textColor="@color/login_form_details" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnplaceorder"
+        >
+
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+</RelativeLayout>

@@ -5,6 +5,7 @@ private int productimg;
 private String productname;
 private String productdesc;
 public int rate;
+public int amount;
 
     public ProductModel(int productimg, String productname, String productdesc, int rate) {
         this.productimg = productimg;
@@ -13,6 +14,22 @@ public int rate;
         this.rate = rate;
 
 
+    }
+
+    public ProductModel(int productimg, String productname, String productdesc, int rate, int amount) {
+        this.productimg = productimg;
+        this.productname = productname;
+        this.productdesc = productdesc;
+        this.rate = rate;
+        this.amount = amount;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public int getProductimg() {

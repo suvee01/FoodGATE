@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/lightorange"
     android:orientation="vertical">
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
@@ -44,9 +44,9 @@
         android:id="@+id/cat_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="3dp"
         android:layout_below="@id/txtcat"
-         />
+        android:layout_marginTop="20dp"
+        android:elevation="3dp" />
 
     <RelativeLayout
         android:id="@+id/relaative"
@@ -66,12 +66,13 @@
 
     </RelativeLayout>
 
-<androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
 
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/recyproduct"
-    android:layout_below="@id/relaative"/>
+        android:id="@+id/recyproduct"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relaative"
+        android:layout_marginTop="34dp" />
 
 </RelativeLayout>
 </ScrollView>
