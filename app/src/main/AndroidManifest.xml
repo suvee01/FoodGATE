@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CartActivity" android:parentActivityName=".CartActivity"></activity>
+        <activity android:name=".AccountActivity"></activity>
+        <activity
+            android:name=".CartActivity"
+            android:parentActivityName=".CartActivity" />
         <activity android:name=".ProductDetailActivity" />
         <activity
             android:name=".SplashActivity"
