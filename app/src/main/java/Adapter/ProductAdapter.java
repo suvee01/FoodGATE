@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineliquorfinal.ProductDetailActivity;
 import com.example.onlineliquorfinal.R;
 
 import java.util.List;
@@ -20,11 +21,11 @@ import Model.ProductModel;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-Context mcontext;
+Context mContent;
 List<ProductModel> lstproduct;
 
-public ProductAdapter(Context mcontext, List<ProductModel> lstproduct){
-this.mcontext= mcontext;
+public ProductAdapter(Context mcontent, List<ProductModel> lstproduct){
+this.mContent= mcontent;
 this.lstproduct=lstproduct;
 }
 
@@ -32,7 +33,7 @@ this.lstproduct=lstproduct;
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v= LayoutInflater.from(mcontext).inflate(R.layout.cardview_product, parent,false);
+            View v= LayoutInflater.from(mContent).inflate(R.layout.cardview_product, parent,false);
             return new ProductViewHolder(v);
     }
 
@@ -46,16 +47,18 @@ this.lstproduct=lstproduct;
         holder.productdesc.setText(lstproduct.get(position).getProductdesc());
         holder.imgpro.setImageResource(lstproduct.get(position).getProductimg());
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.cardview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent= new Intent(mcontext, ProductdetailFragment.class);
+                Intent intent= new Intent(mContent, ProductDetailActivity.class);
 
                 intent.putExtra("Name",lstproduct.get(position).getProductname());
                 intent.putExtra("Description",lstproduct.get(position).getProductdesc());
                 intent.putExtra("Image",lstproduct.get(position).getProductimg());
+                intent.putExtra("Rate",lstproduct.get(position).getRate());
 
-                mcontext.startActivity(intent);
+
+                mContent.startActivity(intent);
             }
         });
 
@@ -70,7 +73,7 @@ this.lstproduct=lstproduct;
 
                 ImageView imgpro;
                 TextView productname;
-                CardView cardView;
+                CardView cardview;
                 TextView productdesc;
 
 
@@ -80,7 +83,7 @@ this.lstproduct=lstproduct;
         productname=itemView.findViewById(R.id.product_name_id);
         productdesc=itemView.findViewById(R.id.product_desc_id);
         imgpro= itemView.findViewById(R.id.product_img_id);
-        cardView=itemView.findViewById(R.id.cardview);
+        cardview=itemView.findViewById(R.id.cardview);
 
     }
     }

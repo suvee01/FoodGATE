@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et1,et2;
     private Button login;
     private TextView LoginWithGG;
-    private TextView signup, forgetpassword;
+    private TextView signup, Forgetpass;
     Vibrator vibrator;
 
     @Override
@@ -35,8 +35,17 @@ public class LoginActivity extends AppCompatActivity {
         et2 = findViewById(R.id.password);
         login = findViewById(R.id.btn_login);
         LoginWithGG=findViewById(R.id.btnGG);
+        Forgetpass=findViewById(R.id.forgot_password);
         signup=findViewById(R.id.tvsignup);
 
+
+        Forgetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(LoginActivity.this, ForgetPassActivity.class );
+                startActivity(i);
+            }
+        });
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
