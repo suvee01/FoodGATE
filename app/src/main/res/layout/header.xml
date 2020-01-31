@@ -3,12 +3,13 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="160dp"
-    android:background="@drawable/logo7"
+    android:background="@drawable/logo"
     >
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
         android:src="@mipmap/ic_launcher_round"/>
 
     <TextView
