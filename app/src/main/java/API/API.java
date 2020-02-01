@@ -16,7 +16,8 @@ public interface API {
 
 @POST ("/users/signup")
  Call<Void> register (@Body User regUser);
+
  @GET("users/me")
-  Call<User> getUserDetails(@Header("Authorization") String token);
+  Call<User> getUserDetails(@Header("Authorization")String token);
 
 }

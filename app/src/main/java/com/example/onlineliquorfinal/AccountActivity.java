@@ -44,8 +44,8 @@ public class AccountActivity extends AppCompatActivity {
     }
     private void loadCurrentUser() {
         //user token access here from URL
-         API api = url.getInstance().create(API.class);
-        final Call<User> userCall = API.getUserDetails(token);
+        API usersAPI = url.getInstance().create(API.class);
+        Call<User>userCall= usersAPI.getUserDetails(url.token);
 
         userCall.enqueue(new Callback<User>(){
 
@@ -75,6 +75,7 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
 
+                Toast.makeText(AccountActivity.this, "Error " + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
