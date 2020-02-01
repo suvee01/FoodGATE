@@ -12,9 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.example.onlineliquorfinal.Fragment.AccountFragment;
 import com.example.onlineliquorfinal.Fragment.CartFragment;
@@ -24,18 +26,24 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.List;
 
+import API.CategoryAPI;
 import Model.CategoryModel;
 import Model.ProductModel;
+import URL.url;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashboardActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
-    Fragment selectedFragment=null;
+//    Fragment selectedFragment=null;
     private ActionBarDrawerToggle mToggle;
     private FrameLayout frameLayout;
 
     public static List<CategoryModel> lstcat= new ArrayList<>();
     public static List<ProductModel> lstproduct = new ArrayList<>();
+    private static final String TAG="DashboardActivity";
     RecyclerView.LayoutManager layoutManager;
 
     private RecyclerView rv_product;
@@ -46,7 +54,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_dashboard);
         getSupportActionBar().hide();
 
-        mDrawerLayout= (DrawerLayout) findViewById(R.id.drawyerlayout);
+        mDrawerLayout= findViewById(R.id.drawyerlayout);
         NavigationView navigationView=findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -64,10 +72,34 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
 
-        lstcat=new ArrayList<>();
-        lstcat.add(new CategoryModel(R.drawable.beer,"Beer"));
-        lstcat.add(new CategoryModel(R.drawable.sig,"Whiskey"));
-        lstcat.add(new CategoryModel(R.drawable.ruslan,"Rum"));
+//        lstcat=new ArrayList<>();
+//        lstcat.add(new CategoryModel(R.drawable.beer,"Beer"));
+//        lstcat.add(new CategoryModel(R.drawable.sig,"Whiskey"));
+//        lstcat.add(new CategoryModel(R.drawable.ruslan,"Rum"));
+
+        CategoryAPI categoryAPI= url.getInstance().create(CategoryAPI.class);
+        Call<List<CategoryModel>> categorycall =categoryAPI.getAllCategory();
+
+       categorycall.enqueue(new Callback<List<CategoryModel>>() {
+           @Override
+           public void onResponse(Call<List<CategoryModel>> call, Response<List<CategoryModel>> response) {
+               lstcat = response.body();
+               Log.e(TAG, "onResponse: "+lstcat);
+               Toast.makeText(DashboardActivity.this, "pass:", Toast.LENGTH_SHORT).show();
+           }
+
+           @Override
+           public void onFailure(Call<List<CategoryModel>> call, Throwable t) {
+
+               Toast.makeText(DashboardActivity.this, "fail"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+               Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+
+           }
+
+
+       });
+
+
 
         lstproduct=new ArrayList<>();
         lstproduct.add(new ProductModel(R.drawable.beer,"Beer","70ml",70));

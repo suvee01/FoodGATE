@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import API.API;
 import Model.User;
-import URL.URL;
+import URL.url;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -76,7 +76,7 @@ public class SignupActivity extends AppCompatActivity {
 
         User regUser=new User(fname,lname,address,phone,email,username,password);
 
-        API api=URL.getInstance().create(API.class);
+        API api= url.getInstance().create(API.class);
             Call<Void> call=api.register(regUser);
 
             call.enqueue(new Callback<Void>() {

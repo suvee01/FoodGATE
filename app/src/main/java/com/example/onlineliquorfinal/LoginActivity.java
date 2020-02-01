@@ -12,8 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import API.API;
+import Model.LoginResponse;
 import Model.User;
-import URL.URL;
+import URL.url;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,24 +58,27 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                         User user= new User(et1.getText().toString(), et2.getText().toString());
-                    API api= URL.getInstance().create(API.class);
-                    Call<Void>call= api.login(user);
+                    API api= url.getInstance().create(API.class);
+                    Call<LoginResponse>call= api.login(user);
 
-                    call.enqueue(new Callback<Void>() {
+                    call.enqueue(new Callback<LoginResponse>() {
                         @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
+                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                             if(!response.isSuccessful()){
                                 Toast.makeText(LoginActivity.this, "Login error" + response.message(), Toast.LENGTH_SHORT).show();
                                 vibrator=(Vibrator)getSystemService(VIBRATOR_SERVICE);
                                 vibrator.vibrate(50);
                                 return;
                             }
+                            System.out.println(response.body().getToken());
                             Intent i= new Intent(LoginActivity.this, DashboardActivity.class);
                             startActivity(i);
                         }
 
+
+
                         @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
+                        public void onFailure(Call<LoginResponse> call, Throwable t) {
 
                         Toast.makeText(LoginActivity.this, "Error: "+t.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
 

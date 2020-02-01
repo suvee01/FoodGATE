@@ -1,7 +1,8 @@
 package Adapter;
 
 import android.content.Context;
-import android.media.Image;
+import android.graphics.BitmapFactory;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.onlineliquorfinal.R;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import Model.CategoryModel;
+import URL.url;
+import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.http.Url;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
@@ -39,11 +45,25 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder viewHolder, int position) {
 
-       CategoryModel pc=categoryModelList.get(position);
-        viewHolder.category_icon.setImageResource(pc.getCat_img());
-        viewHolder.category_name.setText(categoryModelList.get(position).getCat_name());
+//       CategoryModel pc=categoryModelList.get(position);
+//        viewHolder.category_icon.setImageResource(pc.getCat_img());
+//        viewHolder.category_name.setText(categoryModelList.get(position).getCat_name());
 
+      CategoryModel cat = categoryModelList.get(position);
+        //holder.category_img.setImageResource(cat.getImage());
 
+        String imgPath = url.BASE_URL + "uploads/" + cat.getCat_img();
+        StrictMode();
+        try {
+           URL url=new URL(imgPath);
+            viewHolder.category_icon.setImageBitmap(BitmapFactory.decodeStream((InputStream) url.getContent()));
+        } catch (Exception e) {
+        }
+        viewHolder.category_name.setText(cat.getCat_name());
+    }
+    private void StrictMode() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     @Override
@@ -53,8 +73,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-        private ImageView category_icon;
-        private TextView category_name;
+     CircleImageView category_icon;
+       TextView category_name;
 
 
         public ViewHolder(@NonNull View itemView) {
