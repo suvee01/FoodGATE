@@ -51,18 +51,20 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
                         <TextView
+                            android:id="@+id/firstname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="User's First"
+                            android:hint="User's First"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:layout_marginTop="60dp"
                             android:layout_gravity="center_horizontal"
                             />
                         <TextView
+                            android:id="@+id/lstname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="User's Lastname"
+                            android:hint="User's Lastname"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:layout_marginTop="20dp"
@@ -71,9 +73,10 @@
                             />
 
                         <TextView
+                            android:id="@+id/uemail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Email"
+                            android:hint="Email"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:layout_marginTop="10dp"
@@ -81,9 +84,10 @@
                             />
 
                         <TextView
+                            android:id="@+id/uadd"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Address"
+                            android:hint="Address"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:layout_marginTop="20dp"
@@ -91,9 +95,10 @@
                             />
 
                         <TextView
+                            android:id="@+id/uphone"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Phone number"
+                            android:hint="Phone number"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:layout_marginTop="20dp"
@@ -101,9 +106,10 @@
                             />
 
                         <TextView
+                            android:id="@+id/user"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Username"
+                            android:hint="Username"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:layout_marginTop="20dp"

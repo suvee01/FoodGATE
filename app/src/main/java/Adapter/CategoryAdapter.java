@@ -47,7 +47,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 //        viewHolder.category_icon.setImageResource(pc.getCat_img());
 //        viewHolder.category_name.setText(categoryModelList.get(position).getCat_name());
 
-      CategoryModel cat = categoryModelList.get(position);
+         CategoryModel cat = categoryModelList.get(position);
         //holder.category_img.setImageResource(cat.getImage());
 
         String imgPath = url.BASE_URL + "uploads/" + cat.getCat_img();
