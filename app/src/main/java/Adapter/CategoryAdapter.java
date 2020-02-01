@@ -6,7 +6,6 @@ import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,9 +18,8 @@ import java.net.URL;
 import java.util.List;
 
 import Model.CategoryModel;
-import URL.url;
+import com.example.onlineliquorfinal.URL.url;
 import de.hdodenhof.circleimageview.CircleImageView;
-import retrofit2.http.Url;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 

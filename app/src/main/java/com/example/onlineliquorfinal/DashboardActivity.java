@@ -22,6 +22,7 @@ import com.example.onlineliquorfinal.Fragment.AccountFragment;
 import com.example.onlineliquorfinal.Fragment.CartFragment;
 import com.example.onlineliquorfinal.Fragment.DashboardFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.example.onlineliquorfinal.URL.url;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ import java.util.List;
 import API.CategoryAPI;
 import Model.CategoryModel;
 import Model.ProductModel;
-import URL.url;
+import com.example.onlineliquorfinal.URL.url;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -145,9 +146,22 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             case  R.id.Account:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new AccountFragment()).commit();
                 break;
+
+            case R.id.Logout:
+                logout();
+                break;
         }
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void logout() {
+        if(url.token!="Bearer"){
+            url.token="Bearer";
+        }
+
+        Intent i= new Intent(DashboardActivity.this,LoginActivity.class);
+        startActivity(i);
     }
 
 //    @Override
@@ -155,4 +169,5 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 //
 //
 //    }
+
 }
