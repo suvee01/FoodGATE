@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.onlineliquorfinal.DashboardActivity;
 import com.example.onlineliquorfinal.ProductDetailActivity;
 import com.example.onlineliquorfinal.R;
 
@@ -21,20 +22,20 @@ import Model.ProductModel;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-Context mContent;
-List<ProductModel> lstproduct;
+    Context mContent;
+    List<ProductModel> lstproduct;
 
-public ProductAdapter(Context mcontent, List<ProductModel> lstproduct){
-this.mContent= mcontent;
-this.lstproduct=lstproduct;
-}
+    public ProductAdapter(Context mcontent, List<ProductModel> lstproduct){
+        this.mContent= mcontent;
+        this.lstproduct=lstproduct;
+    }
 
 
     @NonNull
     @Override
     public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View v= LayoutInflater.from(mContent).inflate(R.layout.cardview_product, parent,false);
-            return new ProductViewHolder(v);
+        View v= LayoutInflater.from(mContent).inflate(R.layout.cardview_product, parent,false);
+        return new ProductViewHolder(v);
     }
 
     @Override
@@ -51,13 +52,6 @@ this.lstproduct=lstproduct;
             @Override
             public void onClick(View v) {
                 Intent intent= new Intent(mContent, ProductDetailActivity.class);
-
-                intent.putExtra("Name",lstproduct.get(position).getProductname());
-                intent.putExtra("Description",lstproduct.get(position).getProductdesc());
-                intent.putExtra("Image",lstproduct.get(position).getProductimg());
-                intent.putExtra("Rate",lstproduct.get(position).getRate());
-
-
                 mContent.startActivity(intent);
             }
         });
@@ -71,20 +65,20 @@ this.lstproduct=lstproduct;
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
-                ImageView imgpro;
-                TextView productname;
-                CardView cardview;
-                TextView productdesc;
+        ImageView imgpro;
+        TextView productname;
+        CardView cardview;
+        TextView productdesc;
 
 
-    public ProductViewHolder(View itemView){
-        super(itemView);
+        public ProductViewHolder(View itemView){
+            super(itemView);
 
-        productname=itemView.findViewById(R.id.product_name_id);
-        productdesc=itemView.findViewById(R.id.product_desc_id);
-        imgpro= itemView.findViewById(R.id.product_img_id);
-        cardview=itemView.findViewById(R.id.cardview);
+            productname=itemView.findViewById(R.id.product_name_id);
+            productdesc=itemView.findViewById(R.id.product_desc_id);
+            imgpro= itemView.findViewById(R.id.product_img_id);
+            cardview=itemView.findViewById(R.id.cardview);
 
-    }
+        }
     }
 }

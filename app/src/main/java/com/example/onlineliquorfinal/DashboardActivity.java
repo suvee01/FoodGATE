@@ -11,11 +11,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.onlineliquorfinal.Fragment.AccountFragment;
@@ -49,11 +51,18 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
     private RecyclerView rv_product;
 
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         getSupportActionBar().hide();
+
+//        SharedPreferences sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
+//        String display= sharedPreferences.getString("display","");
+//        TextView info= (TextView) findViewById(R.id.husername);
+//        info.setText(display);
 
         mDrawerLayout= findViewById(R.id.drawyerlayout);
         NavigationView navigationView=findViewById(R.id.nav_view);
@@ -72,6 +81,13 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
+        sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
+        String token = sharedPreferences.getString("token","");
+
+        if (token.equals(" ")){
+            Intent intent= new Intent(DashboardActivity.this,LoginActivity.class);
+            startActivity(intent);
+        }
 
 //        lstcat=new ArrayList<>();
 //        lstcat.add(new CategoryModel(R.drawable.beer,"Beer"));
@@ -84,6 +100,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
        categorycall.enqueue(new Callback<List<CategoryModel>>() {
            @Override
            public void onResponse(Call<List<CategoryModel>> call, Response<List<CategoryModel>> response) {
+
                lstcat = response.body();
                Log.e(TAG, "onResponse: "+lstcat);
                Toast.makeText(DashboardActivity.this, "pass:", Toast.LENGTH_SHORT).show();
@@ -99,6 +116,8 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
 
        });
+
+
 
 
 
