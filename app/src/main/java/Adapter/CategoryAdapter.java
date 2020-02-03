@@ -32,8 +32,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         this.mContext= mContext;
         this.lstcat = categorymodelList;
     }
-
-    @NonNull
     @Override
     public CategoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
 
@@ -53,14 +51,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
          CategoryModel cat = lstcat.get(position);
         //holder.category_img.setImageResource(cat.getImage());
 
-        String imgPath = url.BASE_URL + "uploads/" + cat.getCat_img();
+        String imgPath = url.BASE_URL + "uploads/" + "imageFile-1580697315369.png";
         StrictMode();
         try {
            URL url=new URL(imgPath);
             viewHolder.category_icon.setImageBitmap(BitmapFactory.decodeStream((InputStream) url.getContent()));
         } catch (Exception e) {
         }
-        viewHolder.category_name.setText(cat.getCat_name());
+        viewHolder.category_name.setText(cat.getCategory());
     }
     private void StrictMode() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

@@ -24,11 +24,14 @@ import API.API;
 import Model.LoginResponse;
 import Model.User;
 import com.example.onlineliquorfinal.URL.url;
+import com.example.onlineliquorfinal.bll.LoginBLL;
 import com.example.onlineliquorfinal.createChannel.CreateChannel;
+import com.example.onlineliquorfinal.strictmode.StrictModeClass;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Url;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -51,7 +54,7 @@ public NotificationManagerCompat notificationManagerCompat;
 
 
         tvgyro= findViewById(R.id.tvgyro);
-        sensorGyro();
+       // sensorGyro();
         et1 = findViewById(R.id.username);
         et2 = findViewById(R.id.password);
         login = findViewById(R.id.btn_login);
@@ -74,100 +77,106 @@ public NotificationManagerCompat notificationManagerCompat;
                 startActivity(i);
             }
         });
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                        User user= new User(et1.getText().toString(), et2.getText().toString());
-
-                    API api= url.getInstance().create(API.class);
-                    Call<LoginResponse>call= api.login(user);
-                    call.enqueue(new Callback<LoginResponse>() {
-                        @Override
-                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-
-                           if (!response.isSuccessful()) {
-                                Toast.makeText(LoginActivity.this, "Login error" + response.message(), Toast.LENGTH_SHORT).show();
-                                vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-                                vibrator.vibrate(50);
-                                return;
-                            } else {
-                                System.out.println(response.body().getToken());
-
-                                url.token += response.body().getToken();
-                                Toast.makeText(LoginActivity.this, "Token:" + response.body().getToken(), Toast.LENGTH_SHORT);
-                                Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
-                                startActivity(i);
-
-                            }
-
-
-
-                        }
-
-
-
-                        @Override
-                        public void onFailure(Call<LoginResponse> call, Throwable t) {
-
-                        Toast.makeText(LoginActivity.this, "Error: "+t.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
-
-
-                        }
-
-
-                    });
-
-
-                }
-
-
-
-            });
-
-
+//            login.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    login();
+////                        User user= new User(et1.getText().toString(), et2.getText().toString());
+////
+////                    API api= url.getInstance().create(API.class);
+////                    Call<LoginResponse>call= api.login(user);
+////                    call.enqueue(new Callback<LoginResponse>() {
+////                        @Override
+////                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+////
+////                           if (!response.isSuccessful()) {
+////                                Toast.makeText(LoginActivity.this, "Login error" + response.message(), Toast.LENGTH_SHORT).show();
+////                                vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+////                                vibrator.vibrate(50);
+////                                return;
+////                            } else {
+////                               // System.out.println(response.body().getToken());
+////
+////                                url.token += response.body().getToken();
+////                               Toast.makeText(LoginActivity.this, url.token, Toast.LENGTH_SHORT).show();
+////                               // Toast.makeText(LoginActivity.this, "Token:" + response.body().getToken(), Toast.LENGTH_SHORT);
+//////                                Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
+//////                                startActivity(i);
+////
+////                            }
+////                        }
+///                                @Override
+////                        public void onFailure(Call<LoginResponse> call, Throwable t) {
+////
+////                        Toast.makeText(LoginActivity.this, "Error: "+t.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
+////                        }
+////                    });
+//                }
+//            });
+//
+//
             LoginWithGG.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(LoginActivity.this,"You have clicked on Google Login",Toast.LENGTH_SHORT).show();
                 }
             });
-    }
+//    }
+//
+//    private void sensorGyro() {
+//        sensorManager=(SensorManager) getSystemService(SENSOR_SERVICE);
+//        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+//        SensorEventListener gyrolistener= new SensorEventListener() {
+//            @Override
+//            public void onSensorChanged(SensorEvent event) {
+//                if(event.values[1]<0){
+//                    tvgyro.setText("Left");
+//
+//                }
+//                else if (event.values[1]>0){
+//                    tvgyro.setText("Right");
+//                }
+//            }
+//
+//            @Override
+//            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+//
+//
+//            }
+//        };
+//
+//        if(sensor!=null){
+//            sensorManager.registerListener(gyrolistener, sensor,SensorManager.SENSOR_DELAY_NORMAL);
+//
+//        }else {
+//            Toast.makeText(this,"No sensor found",Toast.LENGTH_SHORT).show();
+//
+//        }
+//    }
 
-    private void sensorGyro() {
-        sensorManager=(SensorManager) getSystemService(SENSOR_SERVICE);
-        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        SensorEventListener gyrolistener= new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                if(event.values[1]<0){
-                    tvgyro.setText("Left");
+       login.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               login();
+           }
+       });
+}
 
-                }
-                else if (event.values[1]>0){
-                    tvgyro.setText("Right");
-                }
-            }
+    private void login() {
+        String username = et1.getText().toString();
+        String password = et2.getText().toString();
 
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        LoginBLL loginBLL = new LoginBLL();
 
-
-            }
-        };
-
-        if(sensor!=null){
-            sensorManager.registerListener(gyrolistener, sensor,SensorManager.SENSOR_DELAY_NORMAL);
-
-        }else {
-            Toast.makeText(this,"No sensor found",Toast.LENGTH_SHORT).show();
-
+        StrictModeClass.StrictMode();
+        if (loginBLL.checkUser(username, password)) {
+            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this, "Either username or password is incorrect", Toast.LENGTH_SHORT).show();
+            et1.requestFocus();
         }
     }
-
-      public void openSignup(){
-     Intent openSignup= new Intent(this, SignupActivity.class);
-       startActivity(openSignup);
-                        }
-
-
-}
+    }

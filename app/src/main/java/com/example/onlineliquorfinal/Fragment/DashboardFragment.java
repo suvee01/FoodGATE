@@ -1,6 +1,7 @@
 package com.example.onlineliquorfinal.Fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,21 +11,29 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.onlineliquorfinal.DashboardActivity;
 import com.example.onlineliquorfinal.ProductDetailActivity;
 import com.example.onlineliquorfinal.R;
+import com.example.onlineliquorfinal.URL.url;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import API.CategoryAPI;
 import Adapter.CategoryAdapter;
 import Adapter.ProductAdapter;
 import Model.CategoryModel;
 import Model.ProductModel;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import static com.example.onlineliquorfinal.DashboardActivity.lstcat;
 import static com.example.onlineliquorfinal.DashboardActivity.lstproduct;
@@ -33,7 +42,8 @@ import static com.example.onlineliquorfinal.DashboardActivity.lstproduct;
  * A simple {@link Fragment} subclass.
  */
 public class DashboardFragment extends Fragment {
-
+    Context context;
+    String TAG= "DashboardFragment";
 
 
 
@@ -47,27 +57,39 @@ public class DashboardFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view= inflater.inflate(R.layout.fragment_dashboard, container, false);
-        cat_recyclerview= view.findViewById(R.id.cat_recyclerview);
+        context = getContext();
+
         rv_product= view.findViewById(R.id.recyproduct);
-
-
-        CategoryAdapter categoryAdapter= new CategoryAdapter(getContext(),lstcat);
-        cat_recyclerview.setAdapter(categoryAdapter);
-        cat_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
-
-        ProductAdapter productAdapter= new ProductAdapter(getContext(),lstproduct);
-        rv_product.setAdapter(productAdapter);
         rv_product.setLayoutManager(new GridLayoutManager(getContext(),3));
 
+        cat_recyclerview= view.findViewById(R.id.cat_recyclerview);
+        cat_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
 
+
+        CategoryAPI categoryAPI= url.getInstance().create(CategoryAPI.class);
+        Call<List<CategoryModel>> categorycall =categoryAPI.getAllCategory();
+
+        categorycall.enqueue(new Callback<List<CategoryModel>>() {
+            @Override
+            public void onResponse(Call<List<CategoryModel>> call, Response<List<CategoryModel>> response) {
+                Toast.makeText(context,"Category List Fetched",Toast.LENGTH_LONG).show();
+                lstcat = response.body();
+                CategoryAdapter ca = new CategoryAdapter(context,lstcat);
+                cat_recyclerview.setAdapter(ca);
+            }
+
+            @Override
+            public void onFailure(Call<List<CategoryModel>> call, Throwable t) {
+
+                Toast.makeText(context, "fail"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+
+            }
+        });
 
         return view;
-
-
     }
 
 }

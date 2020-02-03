@@ -1,31 +1,75 @@
 package Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class CategoryModel {
 
-    private String Cat_img;
-    private String Cat_name;
+    @SerializedName("_id")
+    @Expose
+    private String id;
+    @SerializedName("category")
+    @Expose
+    private String category;
+    @SerializedName("Cat_img")
+    @Expose
+    private String catImg;
+    @SerializedName("createdAt")
+    @Expose
+    private String createdAt;
+    @SerializedName("updatedAt")
+    @Expose
+    private String updatedAt;
+    @SerializedName("__v")
+    @Expose
+    private Integer v;
 
-
-    public CategoryModel(String cat_img, String cat_name) {
-        Cat_img = cat_img;
-        Cat_name = cat_name;
+    public String getId() {
+        return id;
     }
 
-    public String getCat_img() {
-        return Cat_img;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setCat_img(String cat_img) {
-        Cat_img = cat_img;
+    public String getCategory() {
+        return category;
     }
 
-    public String getCat_name() {
-        return Cat_name;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public void setCat_name(String cat_name) {
-        Cat_name = cat_name;
+    public String getCatImg() {
+        return catImg;
     }
+
+    public void setCatImg(String catImg) {
+        this.catImg = catImg;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Integer getV() {
+        return v;
+    }
+
+    public void setV(Integer v) {
+        this.v = v;
+    }
+
 }
-
-

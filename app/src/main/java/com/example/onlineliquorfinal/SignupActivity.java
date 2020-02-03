@@ -14,6 +14,8 @@ import android.widget.Toast;
 import API.API;
 import Model.User;
 import com.example.onlineliquorfinal.URL.url;
+import com.example.onlineliquorfinal.serverresponse.SignUpResponse;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -89,11 +91,11 @@ public class SignupActivity extends AppCompatActivity {
         User regUser=new User(fname,lname,address,phone,email,username,password);
 
         API api= url.getInstance().create(API.class);
-            Call<Void> call=api.register(regUser);
+            Call<SignUpResponse> call=api.register(regUser);
 
-            call.enqueue(new Callback<Void>() {
+            call.enqueue(new Callback<SignUpResponse>() {
                 @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
+                public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                     if (!response.isSuccessful()) {
                         Toast.makeText(SignupActivity.this, "Code " + response.code(), Toast.LENGTH_SHORT).show();
                         return;
@@ -102,7 +104,7 @@ public class SignupActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Void> call, Throwable t) {
+                public void onFailure(Call<SignUpResponse> call, Throwable t) {
                     Toast.makeText(SignupActivity.this, "Error" + t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -115,7 +117,7 @@ public class SignupActivity extends AppCompatActivity {
     private boolean validate(){
 boolean status=true;
 if(etusername.getText().toString().length()<6){
-etusername.setError("Min 6 character");
+etusername.setError("");
 status=false;
 }
 
