@@ -1,28 +1,20 @@
 package com.example.onlineliquorfinal;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.onlineliquorfinal.Fragment.AccountFragment;
 import com.example.onlineliquorfinal.URL.url;
-
-import java.io.InputStream;
-import java.net.URL;
-import java.util.List;
+import static com.example.onlineliquorfinal.URL.url.token;
 
 import API.API;
 import Model.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.Url;
 
 public class AccountActivity extends AppCompatActivity {
    TextView fname, lname,address,phno,email,username;
@@ -38,14 +30,14 @@ public class AccountActivity extends AppCompatActivity {
         phno=findViewById(R.id.uphone);
         email=findViewById(R.id.uemail);
         username=findViewById(R.id.user);
-        loadCurrentUser();
+
         accountframe=findViewById(R.id.aframelayout);
-        setFragment(new AccountFragment());
+        loadCurrentUser();
     }
     private void loadCurrentUser() {
         //user token access here from URL
         API usersAPI = url.getInstance().create(API.class);
-        Call<User>userCall= usersAPI.getUserDetails(url.token);
+        Call<User>userCall= usersAPI.getUserDetails(token);
 
         userCall.enqueue(new Callback<User>(){
 
@@ -80,9 +72,5 @@ public class AccountActivity extends AppCompatActivity {
         });
     }
 
-    private void setFragment(AccountFragment accountFragment) {
-        FragmentTransaction fragmentTransaction=getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(accountframe.getId(),accountFragment);
-        fragmentTransaction.commit();
-    }
+
 }

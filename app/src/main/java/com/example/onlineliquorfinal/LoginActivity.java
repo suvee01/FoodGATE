@@ -36,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private TextView LoginWithGG;
     private TextView signup, Forgetpass;
+    SharedPreferences sharedPreferences;
 public NotificationManagerCompat notificationManagerCompat;
     Vibrator vibrator;
 
@@ -78,28 +79,13 @@ public NotificationManagerCompat notificationManagerCompat;
                 public void onClick(View v) {
                         User user= new User(et1.getText().toString(), et2.getText().toString());
 
-//                    String username= et1.getText().toString();
-//                    String pass= et2.getText().toString();
-//                    SharedPreferences sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
-//
-//                    String userdetails= sharedPreferences.getString(user+pass+"data","incorrect");
-//                        SharedPreferences.Editor editor=sharedPreferences.edit();
-//                        editor.putString("display",userdetails);
-//                        editor.commit();
-
                     API api= url.getInstance().create(API.class);
                     Call<LoginResponse>call= api.login(user);
-
-
-
-
                     call.enqueue(new Callback<LoginResponse>() {
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
 
-
-
-                            if (!response.isSuccessful()) {
+                           if (!response.isSuccessful()) {
                                 Toast.makeText(LoginActivity.this, "Login error" + response.message(), Toast.LENGTH_SHORT).show();
                                 vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
                                 vibrator.vibrate(50);
@@ -113,6 +99,9 @@ public NotificationManagerCompat notificationManagerCompat;
                                 startActivity(i);
 
                             }
+
+
+
                         }
 
 

@@ -8,6 +8,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -20,19 +21,22 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.onlineliquorfinal.Fragment.AccountFragment;
 import com.example.onlineliquorfinal.Fragment.CartFragment;
 import com.example.onlineliquorfinal.Fragment.DashboardFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.example.onlineliquorfinal.URL.url;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
+import API.API;
 import API.CategoryAPI;
+import Adapter.CategoryAdapter;
 import Model.CategoryModel;
 import Model.ProductModel;
-import com.example.onlineliquorfinal.URL.url;
+
+import Model.User;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -43,6 +47,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 //    Fragment selectedFragment=null;
     private ActionBarDrawerToggle mToggle;
     private FrameLayout frameLayout;
+    private  TextView hname;
 
     public static List<CategoryModel> lstcat= new ArrayList<>();
     public static List<ProductModel> lstproduct = new ArrayList<>();
@@ -51,13 +56,17 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
     private RecyclerView rv_product;
 
-    private SharedPreferences sharedPreferences;
+   // private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         getSupportActionBar().hide();
+        hname = findViewById(R.id.husername);
+
+        rv_product = findViewById(R.id.cat_recyclerview);
+
 
 //        SharedPreferences sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
 //        String display= sharedPreferences.getString("display","");
@@ -81,13 +90,13 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
-        sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
-        String token = sharedPreferences.getString("token","");
+      //  sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
+//        String token = sharedPreferences.getString("token","");
 
-        if (token.equals(" ")){
-            Intent intent= new Intent(DashboardActivity.this,LoginActivity.class);
-            startActivity(intent);
-        }
+//        if (token.equals(" ")){
+//            Intent intent= new Intent(DashboardActivity.this,LoginActivity.class);
+//            startActivity(intent);
+//        }
 
 //        lstcat=new ArrayList<>();
 //        lstcat.add(new CategoryModel(R.drawable.beer,"Beer"));
@@ -100,10 +109,11 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
        categorycall.enqueue(new Callback<List<CategoryModel>>() {
            @Override
            public void onResponse(Call<List<CategoryModel>> call, Response<List<CategoryModel>> response) {
-
                lstcat = response.body();
-               Log.e(TAG, "onResponse: "+lstcat);
-               Toast.makeText(DashboardActivity.this, "pass:", Toast.LENGTH_SHORT).show();
+
+//               CategoryAdapter ca = new CategoryAdapter(getApplicationContext(),lstcat);
+//               rv_product.setAdapter(ca);
+//               rv_product.setLayoutManager(new LinearLayoutManager(getApplicationContext(),RecyclerView.HORIZONTAL,false));
            }
 
            @Override
@@ -163,7 +173,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new CartFragment()).commit();
                 break;
             case  R.id.Account:
-                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new AccountFragment()).commit();
+                Intent intent= new Intent(DashboardActivity.this,AccountActivity.class);
+                startActivity(intent);
+               // getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new ()).commit();
                 break;
 
             case R.id.Logout:
@@ -188,5 +200,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 //
 //
 //    }
+
 
 }

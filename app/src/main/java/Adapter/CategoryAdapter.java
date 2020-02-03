@@ -3,10 +3,12 @@ package Adapter;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.os.StrictMode;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +49,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 //        viewHolder.category_icon.setImageResource(pc.getCat_img());
 //        viewHolder.category_name.setText(categoryModelList.get(position).getCat_name());
 
+     //   Toast.makeText(mContext, "Hello", Toast.LENGTH_SHORT).show();
          CategoryModel cat = lstcat.get(position);
         //holder.category_img.setImageResource(cat.getImage());
 

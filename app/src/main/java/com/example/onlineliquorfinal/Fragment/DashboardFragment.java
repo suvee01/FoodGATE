@@ -1,8 +1,10 @@
 package com.example.onlineliquorfinal.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.example.onlineliquorfinal.ProductDetailActivity;
 import com.example.onlineliquorfinal.R;
 
 import java.util.ArrayList;
@@ -38,6 +41,7 @@ public class DashboardFragment extends Fragment {
         // Required empty public constructor
     }
     private RecyclerView cat_recyclerview, rv_product;
+    private CardView cardView;
 
 
 
@@ -58,6 +62,7 @@ public class DashboardFragment extends Fragment {
         ProductAdapter productAdapter= new ProductAdapter(getContext(),lstproduct);
         rv_product.setAdapter(productAdapter);
         rv_product.setLayoutManager(new GridLayoutManager(getContext(),3));
+
 
 
         return view;

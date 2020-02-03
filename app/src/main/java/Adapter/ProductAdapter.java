@@ -48,13 +48,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.productdesc.setText(lstproduct.get(position).getProductdesc());
         holder.imgpro.setImageResource(lstproduct.get(position).getProductimg());
 
-        holder.cardview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent= new Intent(mContent, ProductDetailActivity.class);
-                mContent.startActivity(intent);
-            }
-        });
+
 
     }
 
