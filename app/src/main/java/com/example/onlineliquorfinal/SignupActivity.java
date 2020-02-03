@@ -55,14 +55,6 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                SharedPreferences sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
-//                String newUser= etusername.getText().toString();
-//                String newPassword=etpassword.getText().toString();
-//                String newEmail=etemail.getText().toString();
-//                SharedPreferences.Editor editor= sharedPreferences.edit();
-//                editor.putString(newUser+newPassword+"data",newUser+"/n"+newEmail);
-//                editor.commit();
-
                 if(etpassword.getText().toString().equals(etconfirmpass.getText().toString())){
                     if(validate()){
                         signup();

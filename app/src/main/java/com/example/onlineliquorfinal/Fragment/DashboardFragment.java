@@ -47,6 +47,7 @@ public class DashboardFragment extends Fragment {
 
 
 
+
     public DashboardFragment() {
         // Required empty public constructor
     }
@@ -107,14 +108,7 @@ public class DashboardFragment extends Fragment {
             }
         });
 
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-           //     Intent i= new Intent(DashboardFragment.this,ProductDetailActivity.class);
-             //   startActivity(i);
 
-            }
-        });
         return view;
     }
 

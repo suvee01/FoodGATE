@@ -77,45 +77,6 @@ public NotificationManagerCompat notificationManagerCompat;
                 startActivity(i);
             }
         });
-//            login.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//
-//                    login();
-////                        User user= new User(et1.getText().toString(), et2.getText().toString());
-////
-////                    API api= url.getInstance().create(API.class);
-////                    Call<LoginResponse>call= api.login(user);
-////                    call.enqueue(new Callback<LoginResponse>() {
-////                        @Override
-////                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-////
-////                           if (!response.isSuccessful()) {
-////                                Toast.makeText(LoginActivity.this, "Login error" + response.message(), Toast.LENGTH_SHORT).show();
-////                                vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-////                                vibrator.vibrate(50);
-////                                return;
-////                            } else {
-////                               // System.out.println(response.body().getToken());
-////
-////                                url.token += response.body().getToken();
-////                               Toast.makeText(LoginActivity.this, url.token, Toast.LENGTH_SHORT).show();
-////                               // Toast.makeText(LoginActivity.this, "Token:" + response.body().getToken(), Toast.LENGTH_SHORT);
-//////                                Intent i = new Intent(LoginActivity.this, DashboardActivity.class);
-//////                                startActivity(i);
-////
-////                            }
-////                        }
-///                                @Override
-////                        public void onFailure(Call<LoginResponse> call, Throwable t) {
-////
-////                        Toast.makeText(LoginActivity.this, "Error: "+t.getLocalizedMessage(),Toast.LENGTH_SHORT).show();
-////                        }
-////                    });
-//                }
-//            });
-//
-//
             LoginWithGG.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
