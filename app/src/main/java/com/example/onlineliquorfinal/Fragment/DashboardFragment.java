@@ -68,6 +68,24 @@ public class DashboardFragment extends Fragment {
         cat_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
 
 
+        CategoryAPI productapi= url.getInstance().create(CategoryAPI.class);
+        Call<List<ProductModel>> productcall= productapi.getAllProduct();
+        productcall.enqueue(new Callback<List<ProductModel>>() {
+            @Override
+            public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
+                Toast.makeText(context,"Product List Fetched",Toast.LENGTH_LONG).show();
+                lstproduct=response.body();
+                ProductAdapter pa=new ProductAdapter(context,lstproduct);
+                rv_product.setAdapter(pa);
+            }
+
+            @Override
+            public void onFailure(Call<List<ProductModel>> call, Throwable t) {
+                Toast.makeText(context, "Product fail"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+            }
+        });
+
         CategoryAPI categoryAPI= url.getInstance().create(CategoryAPI.class);
         Call<List<CategoryModel>> categorycall =categoryAPI.getAllCategory();
 
@@ -83,13 +101,23 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onFailure(Call<List<CategoryModel>> call, Throwable t) {
 
-                Toast.makeText(context, "fail"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Category fail"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
 
             }
         });
 
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+           //     Intent i= new Intent(DashboardFragment.this,ProductDetailActivity.class);
+             //   startActivity(i);
+
+            }
+        });
         return view;
     }
+
+
 
 }

@@ -1,43 +1,25 @@
 package Model;
 
 public class ProductModel {
-private int productimg;
 private String productname;
 private String productdesc;
+private String productimg;
 public int rate;
 public int amount;
 
-    public ProductModel(int productimg, String productname, String productdesc, int rate) {
-        this.productimg = productimg;
+    public ProductModel(String productname, String productdesc, String productimg, int rate) {
         this.productname = productname;
         this.productdesc = productdesc;
+        this.productimg = productimg;
         this.rate = rate;
-
-
     }
 
-    public ProductModel(int productimg, String productname, String productdesc, int rate, int amount) {
-        this.productimg = productimg;
+    public ProductModel(String productname, String productdesc, String productimg, int rate, int amount) {
         this.productname = productname;
         this.productdesc = productdesc;
+        this.productimg = productimg;
         this.rate = rate;
         this.amount = amount;
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public int getProductimg() {
-        return productimg;
-    }
-
-    public void setProductimg(int productimg) {
-        this.productimg = productimg;
     }
 
     public String getProductname() {
@@ -56,11 +38,27 @@ public int amount;
         this.productdesc = productdesc;
     }
 
+    public String getProductimg() {
+        return productimg;
+    }
+
+    public void setProductimg(String productimg) {
+        this.productimg = productimg;
+    }
+
     public int getRate() {
         return rate;
     }
 
     public void setRate(int rate) {
         this.rate = rate;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

@@ -33,8 +33,7 @@ public class CartActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        lstproduct=new ArrayList<>();
-        lstproduct.add(new ProductModel(R.drawable.beer,"Beer","70ml",70));
+
     }
 
     private void setFragment(CartFragment cartFragment) {

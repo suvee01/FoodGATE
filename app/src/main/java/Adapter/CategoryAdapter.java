@@ -43,11 +43,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder viewHolder, int position) {
 
-//       CategoryModel pc=categoryModelList.get(position);
-//        viewHolder.category_icon.setImageResource(pc.getCat_img());
-//        viewHolder.category_name.setText(categoryModelList.get(position).getCat_name());
 
-     //   Toast.makeText(mContext, "Hello", Toast.LENGTH_SHORT).show();
          CategoryModel cat = lstcat.get(position);
         //holder.category_img.setImageResource(cat.getImage());
 

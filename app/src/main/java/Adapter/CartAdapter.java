@@ -41,7 +41,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, final int position) {
-        holder.img_product.setImageResource(productlst.get(position).getProductimg());
+        holder.img_product.setImageResource(Integer.parseInt(productlst.get(position).getProductimg()));
         holder.txt_productname.setText(productlst.get(position).getProductname());
         holder.txtproduct_desc.setText(productlst.get(position).getProductdesc());
         holder.txtproduct_rate.setText(new StringBuilder("Rs").append(productlst.get(position).rate));

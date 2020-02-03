@@ -57,9 +57,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     public static List<CategoryModel> lstcat= new ArrayList<>();
     public static List<ProductModel> lstproduct = new ArrayList<>();
     private static final String TAG="DashboardActivity";
-    RecyclerView.LayoutManager layoutManager;
 
-    private RecyclerView rv_product;
     private TextView hUsername;
     private TextView hEmail;
 
@@ -71,11 +69,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_dashboard);
         context  = this;
         getSupportActionBar().hide();
-//        SharedPreferences sharedPreferences = getSharedPreferences("User",MODE_PRIVATE);
-//        String display= sharedPreferences.getString("display","");
-//        TextView info= (TextView) findViewById(R.id.husername);
-//        info.setText(display);
-
         mDrawerLayout= findViewById(R.id.drawyerlayout);
         NavigationView navigationView=findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -101,9 +94,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
             }
         });
-
-
-
         Toolbar toolbar = findViewById(R.id.app_bar);
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,28 +107,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
-      //  sharedPreferences=getSharedPreferences("User",MODE_PRIVATE);
-//        String token = sharedPreferences.getString("token","");
-
-//        if (token.equals(" ")){
-//            Intent intent= new Intent(DashboardActivity.this,LoginActivity.class);
-//            startActivity(intent);
-//        }
-
-//        lstcat=new ArrayList<>();
-//        lstcat.add(new CategoryModel(R.drawable.beer,"Beer"));
-//        lstcat.add(new CategoryModel(R.drawable.sig,"Whiskey"));
-//        lstcat.add(new CategoryModel(R.drawable.ruslan,"Rum"));
-        lstproduct=new ArrayList<>();
-        lstproduct.add(new ProductModel(R.drawable.beer,"Beer","70ml",70));
-        lstproduct.add(new ProductModel(R.drawable.sig,"Whiskey","70ml",80));
-        lstproduct.add(new ProductModel(R.drawable.ruslan,"Rum","70ml",80));
-        lstproduct.add(new ProductModel(R.drawable.goak,"Golden Oak","70ml",80));
-        lstproduct.add(new ProductModel(R.drawable.oak,"Black OAK","70ml",80));
-        lstproduct.add(new ProductModel(R.drawable.rum,"Khukuri","70ml",80));
-        lstproduct.add(new ProductModel(R.drawable.ruslan,"Rum","70ml",80));
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         frameLayout=findViewById(R.id.framelayout);

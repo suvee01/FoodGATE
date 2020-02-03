@@ -2,6 +2,8 @@ package Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
+import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,26 +17,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.onlineliquorfinal.DashboardActivity;
 import com.example.onlineliquorfinal.ProductDetailActivity;
 import com.example.onlineliquorfinal.R;
+import com.example.onlineliquorfinal.URL.url;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import Model.ProductModel;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.example.onlineliquorfinal.strictmode.StrictModeClass.StrictMode;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
 
-    Context mContent;
+    Context mContext;
     List<ProductModel> lstproduct;
 
-    public ProductAdapter(Context mcontent, List<ProductModel> lstproduct){
-        this.mContent= mcontent;
+    public ProductAdapter(Context context, List<ProductModel> lstproduct){
+        this.mContext= mContext;
         this.lstproduct=lstproduct;
     }
 
 
     @NonNull
     @Override
-    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(mContent).inflate(R.layout.cardview_product, parent,false);
+    public ProductAdapter.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_product,parent,false);
+
         return new ProductViewHolder(v);
     }
 
@@ -43,13 +52,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
 
         ProductModel res=lstproduct.get(position);
+        String imgPath = url.BASE_URL + "uploads/" + "imageFile-1580744662347.png";
+        StrictMode();
+        try {
+            URL url=new URL(imgPath);
+            holder.imgpro.setImageBitmap(BitmapFactory.decodeStream((InputStream) url.getContent()));
+        } catch (Exception e) {
+        }
+        holder.productname.setText(res.getProductname());
 
-        holder.productname.setText(lstproduct.get(position).getProductname());
-        holder.productdesc.setText(lstproduct.get(position).getProductdesc());
-        holder.imgpro.setImageResource(lstproduct.get(position).getProductimg());
 
-
-
+    }
+    private void StrictMode() {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     @Override
@@ -59,19 +75,20 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgpro;
+        CircleImageView imgpro;
         TextView productname;
-        CardView cardview;
         TextView productdesc;
+        TextView prate;
 
 
         public ProductViewHolder(View itemView){
             super(itemView);
 
+
             productname=itemView.findViewById(R.id.product_name_id);
             productdesc=itemView.findViewById(R.id.product_desc_id);
             imgpro= itemView.findViewById(R.id.product_img_id);
-            cardview=itemView.findViewById(R.id.cardview);
+            prate= itemView.findViewById(R.id.product_rate_id);
 
         }
     }

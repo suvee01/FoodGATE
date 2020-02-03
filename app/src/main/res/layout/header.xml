@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="160dp"
-    android:background="@drawable/logo"
-    >
+
+    android:layout_height="180dp"
+    android:background="@drawable/logo">
 
 
 
@@ -13,6 +13,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginTop="145dp"
         android:text="Name"/>
 
 
@@ -21,10 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:text="Name"/>
-
-
-
+        android:text="Name"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
 
 </LinearLayout>
