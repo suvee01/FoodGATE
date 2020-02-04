@@ -45,9 +45,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
 
         CategoryModel cat = lstcat.get(position);
-        //holder.category_img.setImageResource(cat.getImage());
 
-        String imgPath = url.BASE_URL + "uploads/" + "imageFile-1580697315369.png";
+        String imgPath = url.BASE_URL + "uploads/" + lstcat.get(position).getCatImg();
         StrictMode();
         try {
             URL url=new URL(imgPath);
