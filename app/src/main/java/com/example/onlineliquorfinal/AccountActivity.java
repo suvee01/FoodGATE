@@ -25,7 +25,7 @@ public class AccountActivity extends AppCompatActivity {
         setContentView(R.layout.activity_account);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fname = findViewById(R.id.firstname);
-        lname=findViewById(R.id.lstname);
+       // lname=findViewById(R.id.lstname);
         address=findViewById(R.id.uadd);
         phno=findViewById(R.id.uphone);
         email=findViewById(R.id.uemail);
@@ -56,8 +56,8 @@ public class AccountActivity extends AppCompatActivity {
                 String uphone= response.body().getPhoneno();
                 String uemail= response.body().getEmail();
                 String susername=response.body().getUsername();
-                fname.setText(firstName);
-                lname.setText(lastName);
+                fname.setText(firstName + lastName);
+//                lname.setText(lastName);
                 address.setText(uaddress);
                 phno.setText(uphone);
                 email.setText(uemail);

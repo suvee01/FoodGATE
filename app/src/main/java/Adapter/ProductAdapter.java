@@ -52,7 +52,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, final int position) {
         holder.productname.setText(lstproduct.get(position).getProductname());
-        holder.productdesc.setText(lstproduct.get(position).getProductdesc());
+
         holder.prate.setText(String.valueOf(lstproduct.get(position).getRate()));
         String imgPath = url.BASE_URL + "uploads/" + lstproduct.get(position).getProductimg();
         StrictMode();
@@ -89,7 +89,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public class ProductViewHolder extends RecyclerView.ViewHolder {
         CircleImageView imgpro;
         TextView productname;
-        TextView productdesc;
         TextView prate;
         View view;
 
@@ -98,7 +97,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
             super(itemView);
             this.view = itemView;
             productname=itemView.findViewById(R.id.product_name_id);
-            productdesc=itemView.findViewById(R.id.product_desc_id);
             imgpro= itemView.findViewById(R.id.product_img_id);
             prate= itemView.findViewById(R.id.product_rate_id);
 

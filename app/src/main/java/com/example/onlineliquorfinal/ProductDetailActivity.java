@@ -61,9 +61,6 @@ public class ProductDetailActivity extends AppCompatActivity {
         }
 
 
-        frameLayout=findViewById(R.id.pframelayout);
-//        setFragment(new ProductDetailFragment());
-
 
 
 

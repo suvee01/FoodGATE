@@ -49,7 +49,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     Context context;
     private DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
-    //    Fragment selectedFragment=null;
     private ActionBarDrawerToggle mToggle;
     private FrameLayout frameLayout;
     private  TextView hname;
@@ -61,7 +60,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private TextView hUsername;
     private TextView hEmail;
 
-    // private SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

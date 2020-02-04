@@ -52,7 +52,7 @@ public class DashboardFragment extends Fragment {
         // Required empty public constructor
     }
     private RecyclerView cat_recyclerview, rv_product;
-    private CardView cardView;
+
 
 
 

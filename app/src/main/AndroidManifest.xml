@@ -38,7 +38,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".DashboardActivity" />
-        <activity android:name=".ProductDetailActivity"/>
+        <activity android:name=".ProductDetailActivity"
+            android:parentActivityName=".CartActivity" />
 
 
 
