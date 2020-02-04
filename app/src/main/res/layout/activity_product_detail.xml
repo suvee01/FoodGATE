@@ -20,7 +20,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical">
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/productimg"
                 android:layout_width="125dp"
                 android:layout_height="170dp"
