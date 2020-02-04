@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private TextView LoginWithGG;
     private TextView signup, Forgetpass;
-    SharedPreferences sharedPreferences;
+
 public NotificationManagerCompat notificationManagerCompat;
     Vibrator vibrator;
 
