@@ -49,7 +49,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     Context context;
     private DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
-//    Fragment selectedFragment=null;
+    //    Fragment selectedFragment=null;
     private ActionBarDrawerToggle mToggle;
     private FrameLayout frameLayout;
     private  TextView hname;
@@ -133,7 +133,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             case R.id.home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new DashboardFragment()).commit();
 
-            break;
+                break;
 
             case R.id.Cart:
                 getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new CartFragment()).commit();
@@ -141,7 +141,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             case  R.id.Account:
                 Intent intent= new Intent(DashboardActivity.this,AccountActivity.class);
                 startActivity(intent);
-               // getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new ()).commit();
+                // getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new ()).commit();
                 break;
 
             case R.id.Logout:

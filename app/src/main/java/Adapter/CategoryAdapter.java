@@ -26,7 +26,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     Context mContext;
-     List<CategoryModel> lstcat;
+    List<CategoryModel> lstcat;
 
     public CategoryAdapter(Context context, List<CategoryModel> categorymodelList) {
         this.mContext= mContext;
@@ -44,13 +44,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder viewHolder, int position) {
 
 
-         CategoryModel cat = lstcat.get(position);
+        CategoryModel cat = lstcat.get(position);
         //holder.category_img.setImageResource(cat.getImage());
 
         String imgPath = url.BASE_URL + "uploads/" + "imageFile-1580697315369.png";
         StrictMode();
         try {
-           URL url=new URL(imgPath);
+            URL url=new URL(imgPath);
             viewHolder.category_icon.setImageBitmap(BitmapFactory.decodeStream((InputStream) url.getContent()));
         } catch (Exception e) {
         }
@@ -68,8 +68,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
-     CircleImageView category_icon;
-       TextView category_name;
+        CircleImageView category_icon;
+        TextView category_name;
 
 
         public ViewHolder(@NonNull View itemView) {
