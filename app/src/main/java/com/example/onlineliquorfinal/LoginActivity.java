@@ -14,6 +14,7 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,8 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private TextView LoginWithGG;
     private TextView signup, Forgetpass;
-
-public NotificationManagerCompat notificationManagerCompat;
+    private NotificationManagerCompat notificationManagerCompat;
     Vibrator vibrator;
 
     private SensorManager sensorManager;
@@ -51,7 +51,9 @@ public NotificationManagerCompat notificationManagerCompat;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
+        notificationManagerCompat= NotificationManagerCompat.from(this);
+        CreateChannel channel= new CreateChannel(this);
+        channel.createChannel();
 
         tvgyro= findViewById(R.id.tvgyro);
        // sensorGyro();
@@ -120,6 +122,9 @@ public NotificationManagerCompat notificationManagerCompat;
            @Override
            public void onClick(View v) {
                login();
+
+               DisplayNotification();
+
            }
        });
 }
@@ -135,9 +140,23 @@ public NotificationManagerCompat notificationManagerCompat;
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
             finish();
+
         } else {
             Toast.makeText(this, "Either username or password is incorrect", Toast.LENGTH_SHORT).show();
             et1.requestFocus();
         }
     }
+
+    private void DisplayNotification() {
+
+        Notification notification= new NotificationCompat.Builder(this,CreateChannel.CHANNEL_1)
+        .setSmallIcon(R.drawable.ic_notifications_none_black_24dp)
+         .setContentText("Login Successfull")
+         .setContentText("Login Successfull")
+           .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .build();
+
+        notificationManagerCompat.notify(1,notification);
+
     }
+}
