@@ -43,10 +43,9 @@ public class LoginActivity extends AppCompatActivity {
     private Button login;
     private TextView LoginWithGG;
     private TextView signup, Forgetpass;
+    public SensorManager sensorManager;
     private NotificationManagerCompat notificationManagerCompat;
     Vibrator vibrator;
-
-    private SensorManager sensorManager;
     private TextView tvgyro;
 
     @Override
@@ -60,7 +59,8 @@ public class LoginActivity extends AppCompatActivity {
         channel.createChannel();
 
         tvgyro= findViewById(R.id.tvgyro);
-       // sensorGyro();
+        sensorGyro();
+        sensorLight();
         et1 = findViewById(R.id.username);
         et2 = findViewById(R.id.password);
         login = findViewById(R.id.btn_login);
@@ -91,36 +91,6 @@ public class LoginActivity extends AppCompatActivity {
             });
 //    }
 //
-//    private void sensorGyro() {
-//        sensorManager=(SensorManager) getSystemService(SENSOR_SERVICE);
-//        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-//        SensorEventListener gyrolistener= new SensorEventListener() {
-//            @Override
-//            public void onSensorChanged(SensorEvent event) {
-//                if(event.values[1]<0){
-//                    tvgyro.setText("Left");
-//
-//                }
-//                else if (event.values[1]>0){
-//                    tvgyro.setText("Right");
-//                }
-//            }
-//
-//            @Override
-//            public void onAccuracyChanged(Sensor sensor, int accuracy) {
-//
-//
-//            }
-//        };
-//
-//        if(sensor!=null){
-//            sensorManager.registerListener(gyrolistener, sensor,SensorManager.SENSOR_DELAY_NORMAL);
-//
-//        }else {
-//            Toast.makeText(this,"No sensor found",Toast.LENGTH_SHORT).show();
-//
-//        }
-//    }
 
        login.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -132,6 +102,61 @@ public class LoginActivity extends AppCompatActivity {
            }
        });
 }
+
+    private void sensorLight() {
+        sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
+        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        SensorEventListener sensorEventListener= new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if(event.sensor.getType()==Sensor.TYPE_LIGHT){
+                    Toast.makeText(LoginActivity.this,"onSensor Change:" + event.values[0], Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+        sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
+           }
+
+
+
+
+
+    private void sensorGyro() {
+        sensorManager=(SensorManager) getSystemService(SENSOR_SERVICE);
+        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        SensorEventListener sensorEventListener= new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if(event.values[1]<0){
+                    tvgyro.setText("Left");
+
+                }
+                else if (event.values[1]>0){
+                    tvgyro.setText("Right");
+                }
+
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+        if(sensor!=null){
+            sensorManager.registerListener(sensorEventListener, sensor,SensorManager.SENSOR_DELAY_NORMAL);
+
+        }else {
+            Toast.makeText(this,"No sensor found",Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
 
     private void login() {
         String username = et1.getText().toString();
@@ -148,6 +173,8 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Either username or password is incorrect", Toast.LENGTH_SHORT).show();
             et1.requestFocus();
+            Vibrator vibrator=(Vibrator) getSystemService(VIBRATOR_SERVICE);
+            vibrator.vibrate(2000);
         }
     }
 
