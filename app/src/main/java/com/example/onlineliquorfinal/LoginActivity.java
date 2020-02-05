@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.app.AlertDialog;
 import android.app.Notification;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -46,8 +49,6 @@ public class LoginActivity extends AppCompatActivity {
     public SensorManager sensorManager;
     private NotificationManagerCompat notificationManagerCompat;
     Vibrator vibrator;
-    private TextView tvgyro;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -57,9 +58,7 @@ public class LoginActivity extends AppCompatActivity {
         notificationManagerCompat= NotificationManagerCompat.from(this);
         CreateChannel channel= new CreateChannel(this);
         channel.createChannel();
-
-        tvgyro= findViewById(R.id.tvgyro);
-        sensorGyro();
+        proximity();
         sensorLight();
         et1 = findViewById(R.id.username);
         et2 = findViewById(R.id.password);
@@ -103,6 +102,49 @@ public class LoginActivity extends AppCompatActivity {
        });
 }
 
+    private void proximity() {
+
+        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
+        Sensor sensor=sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        SensorEventListener sensorEventListener= new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                if (event.values[0]<=4){
+                   // lout();
+                }
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+    }
+
+//    private void lout() {
+//
+//        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
+//        builder.setMessage("Are you sure?")
+//                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
+//                        String token=sharedPreferences.getString("token","");
+//                        SharedPreferences.Editor editor=sharedPreferences.edit();
+//                        editor.putString("token"," ");
+//                        editor.commit();
+//
+//                        Intent intent =new Intent(getActivity(),LoginActivity.class);
+//                        startActivity(intent);
+//
+//                    }
+//                })
+//                .setNegativeButton("cancel",null);
+//
+//        AlertDialog alertDialog=builder.create();
+//        alertDialog.show();
+
+
     private void sensorLight() {
         sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
         Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
@@ -123,40 +165,6 @@ public class LoginActivity extends AppCompatActivity {
         sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
            }
 
-
-
-
-
-    private void sensorGyro() {
-        sensorManager=(SensorManager) getSystemService(SENSOR_SERVICE);
-        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        SensorEventListener sensorEventListener= new SensorEventListener() {
-            @Override
-            public void onSensorChanged(SensorEvent event) {
-                if(event.values[1]<0){
-                    tvgyro.setText("Left");
-
-                }
-                else if (event.values[1]>0){
-                    tvgyro.setText("Right");
-                }
-
-            }
-
-            @Override
-            public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
-            }
-        };
-        if(sensor!=null){
-            sensorManager.registerListener(sensorEventListener, sensor,SensorManager.SENSOR_DELAY_NORMAL);
-
-        }else {
-            Toast.makeText(this,"No sensor found",Toast.LENGTH_SHORT).show();
-
-        }
-
-    }
 
     private void login() {
         String username = et1.getText().toString();

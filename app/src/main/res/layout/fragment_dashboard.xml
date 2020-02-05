@@ -81,6 +81,15 @@
     android:layout_marginStart="10dp"
     android:layout_marginTop="25dp"/>
 
+        <TextView
+            android:id="@+id/tvgyro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="164dp"
+            tools:layout_editor_absoluteY="640dp"
+            android:layout_below="@id/txtproduct"
+            />
+
 
     </RelativeLayout>
 

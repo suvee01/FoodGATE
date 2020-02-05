@@ -3,6 +3,10 @@ package com.example.onlineliquorfinal.Fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
@@ -16,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.onlineliquorfinal.DashboardActivity;
@@ -35,6 +40,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.content.Context.SENSOR_SERVICE;
 import static com.example.onlineliquorfinal.DashboardActivity.lstcat;
 import static com.example.onlineliquorfinal.DashboardActivity.lstproduct;
 
@@ -42,6 +48,8 @@ import static com.example.onlineliquorfinal.DashboardActivity.lstproduct;
  * A simple {@link Fragment} subclass.
  */
 public class DashboardFragment extends Fragment {
+
+    public SensorManager sensorManager;
     Context context;
     String TAG= "DashboardFragment";
 
@@ -52,6 +60,7 @@ public class DashboardFragment extends Fragment {
         // Required empty public constructor
     }
     private RecyclerView cat_recyclerview, rv_product;
+    private TextView tvgyro;
 
 
 
@@ -59,9 +68,11 @@ public class DashboardFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        sensorGyro();
+
         View view= inflater.inflate(R.layout.fragment_dashboard, container, false);
         context = getContext();
-
+        tvgyro= view.findViewById(R.id.tvgyro);
         rv_product= view.findViewById(R.id.recyproduct);
         rv_product.setLayoutManager(new GridLayoutManager(getContext(),3));
 
@@ -110,6 +121,39 @@ public class DashboardFragment extends Fragment {
         return view;
     }
 
+
+
+
+//    private void sensorGyro() {
+//        sensorManager=(SensorManager)context.getSystemService(SENSOR_SERVICE);
+//        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+//        SensorEventListener sensorEventListener= new SensorEventListener() {
+//            @Override
+//            public void onSensorChanged(SensorEvent event) {
+//                if(event.values[1]<0){
+//                    tvgyro.setText("Left");
+//
+//                }
+//                else if (event.values[1]>0){
+//                    tvgyro.setText("Right");
+//                }
+//            }
+//
+//            @Override
+//            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+//
+//            }
+//        };
+//        if(sensor!=null){
+//            sensorManager.registerListener(sensorEventListener, sensor,SensorManager.SENSOR_DELAY_NORMAL);
+//
+//        }else {
+//            Toast.makeText(context,"No sensor found",Toast.LENGTH_SHORT).show();
+//
+//        }
+//
+//
+//    }
 
 
 }
