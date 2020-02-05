@@ -6,11 +6,13 @@ import androidx.core.app.NotificationManagerCompat;
 
 import android.app.Notification;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
@@ -26,6 +28,7 @@ import Model.LoginResponse;
 import Model.User;
 import com.example.onlineliquorfinal.URL.url;
 import com.example.onlineliquorfinal.bll.LoginBLL;
+import com.example.onlineliquorfinal.broadcastreciever.BroadCastReceiver;
 import com.example.onlineliquorfinal.createChannel.CreateChannel;
 import com.example.onlineliquorfinal.strictmode.StrictModeClass;
 
@@ -48,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -151,12 +155,26 @@ public class LoginActivity extends AppCompatActivity {
 
         Notification notification= new NotificationCompat.Builder(this,CreateChannel.CHANNEL_1)
         .setSmallIcon(R.drawable.ic_notifications_none_black_24dp)
-         .setContentText("Login Successfull")
-         .setContentText("Login Successfull")
+         .setContentTitle("Liquor Mart")
+         .setContentText("Login Success:" + et1.getText().toString())
            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .build();
 
         notificationManagerCompat.notify(1,notification);
 
+
+    }
+ BroadCastReceiver broadCastReceiver= new BroadCastReceiver(this);
+
+    protected void onStart(){
+        super.onStart();
+        IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(broadCastReceiver,intentFilter);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unregisterReceiver(broadCastReceiver);
     }
 }
