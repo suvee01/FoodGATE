@@ -1,7 +1,10 @@
 package com.example.onlineliquorfinal;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.onlineliquorfinal.Fragment.CartFragment;
 import com.example.onlineliquorfinal.Fragment.DashboardFragment;
 import com.example.onlineliquorfinal.Fragment.ProductDetailFragment;
 import com.example.onlineliquorfinal.URL.url;
@@ -18,6 +22,7 @@ import java.net.URI;
 import java.net.URL;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.Call;
 
 public class ProductDetailActivity extends AppCompatActivity {
 
@@ -27,6 +32,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     int product_rate;
     CircleImageView product_img;
     String product_image;
+    private Button Order;
 
     private TextView textViewName, textViewDesc, textViewRate;
 
@@ -41,6 +47,7 @@ public class ProductDetailActivity extends AppCompatActivity {
         textViewName = findViewById(R.id.proname);
         textViewDesc = findViewById(R.id.prodesc);
         textViewRate = findViewById(R.id.prorate);
+        Order= findViewById(R.id.btnorder);
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
 
@@ -62,6 +69,13 @@ public class ProductDetailActivity extends AppCompatActivity {
 
 
 
+        Order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(ProductDetailActivity.this, CartActivity.class );
+                startActivity(i);
+            }
+        });
 
 
 

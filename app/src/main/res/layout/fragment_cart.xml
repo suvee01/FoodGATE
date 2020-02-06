@@ -8,11 +8,12 @@
     android:background="@color/lightorange"
     tools:context=".Fragment.CartFragment">
 
+
     <FrameLayout
         android:id="@+id/cframelayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:layout_marginBottom="30dp" />
 
     <Button
         android:id="@+id/btnplaceorder"
@@ -20,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_margin="20dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/orange"
         android:text="Place Order"
         android:textColor="@color/login_form_details" />
