@@ -20,6 +20,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,17 +56,11 @@ public class DashboardFragment extends Fragment {
     String TAG= "DashboardFragment";
 
 
-
-
     public DashboardFragment() {
         // Required empty public constructor
     }
     private RecyclerView cat_recyclerview, rv_product;
     private TextView tvgyro;
-
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,6 +68,7 @@ public class DashboardFragment extends Fragment {
 
         View view= inflater.inflate(R.layout.fragment_dashboard, container, false);
         context = getContext();
+
         tvgyro= view.findViewById(R.id.tvgyro);
         rv_product= view.findViewById(R.id.recyproduct);
         rv_product.setLayoutManager(new GridLayoutManager(getContext(),3));

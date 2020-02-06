@@ -26,18 +26,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
-
-
-
-
-
         private EditText etfname, etlname, etaddress, etphno, etemail, etusername,etpassword, etconfirmpass;
         private Button btnsignup;
         private TextView tvlogin;
 
-    private ShakeDetector mShakeDetector;
-    private SensorManager mSensorManager;
-    private Sensor mAccelerometer;
+        private ShakeDetector mShakeDetector;
+        private SensorManager mSensorManager;
+        private Sensor mAccelerometer;
 
 
     @Override

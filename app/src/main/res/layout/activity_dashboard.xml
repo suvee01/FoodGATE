@@ -18,7 +18,15 @@
         layout="@layout/app_bar"
         android:id="@+id/app_bar"/>
 
-<FrameLayout
+        <SearchView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:queryHint="Search Here"
+            android:id="@+id/search"
+            android:iconifiedByDefault="false"/>
+
+        <FrameLayout
     android:id="@+id/framelayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />

@@ -9,6 +9,8 @@ import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ import com.example.onlineliquorfinal.URL.url;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import Model.ProductModel;
@@ -31,14 +34,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.onlineliquorfinal.strictmode.StrictModeClass.StrictMode;
 
-public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> implements Filterable {
 
     Context mContext;
     List<ProductModel> lstproduct;
+    List<ProductModel>productslist;
 
     public ProductAdapter(Context context, List<ProductModel> lstproduct){
         this.mContext= context;
         this.lstproduct=lstproduct;
+        productslist= new ArrayList<>(lstproduct);
     }
 
 
@@ -85,6 +90,40 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
     public int getItemCount() {
         return lstproduct.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return productfilter;
+    };
+
+    Filter productfilter= new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<ProductModel> filteredList= new ArrayList<>();
+            if(constraint==null|| constraint.length()==0){
+                filteredList.addAll(productslist);
+            }else
+            {
+                String filterPattern= constraint.toString().toLowerCase().trim();
+                for(ProductModel productModel: productslist){
+                    if(productModel.getProductname().toLowerCase().contains(filterPattern)){
+                        filteredList.add(productModel);
+                    }
+                }
+            }
+            FilterResults results=new FilterResults();
+            results.values=filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+
+            lstproduct.clear();
+            lstproduct.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
         CircleImageView imgpro;

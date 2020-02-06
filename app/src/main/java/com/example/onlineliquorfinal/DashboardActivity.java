@@ -20,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,7 +53,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private ActionBarDrawerToggle mToggle;
     private FrameLayout frameLayout;
     private  TextView hname;
-
+    SearchView searchView;
     public static List<CategoryModel> lstcat= new ArrayList<>();
     public static List<ProductModel> lstproduct = new ArrayList<>();
     private static final String TAG="DashboardActivity";
@@ -77,6 +78,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         hUsername = headerView.findViewById(R.id.husername);
         hEmail = headerView.findViewById(R.id.hemail);
+        searchView=(SearchView)findViewById(R.id.search);
 
         API api = url.getInstance().create(API.class);
         Call<User> getuserdetails = api.getUserDetails(url.token);
@@ -140,6 +142,11 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
             case  R.id.Account:
                 Intent intent= new Intent(DashboardActivity.this,AccountActivity.class);
                 startActivity(intent);
+                // getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new ()).commit();
+                break;
+            case  R.id.map:
+                Intent i= new Intent(DashboardActivity.this,MapsActivity.class);
+                startActivity(i);
                 // getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new ()).commit();
                 break;
 
