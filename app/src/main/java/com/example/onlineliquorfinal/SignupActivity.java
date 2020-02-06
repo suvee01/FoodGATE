@@ -2,8 +2,11 @@ package com.example.onlineliquorfinal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 
 import API.API;
 import Model.User;
+
+import com.example.onlineliquorfinal.Sensor.ShakeDetector;
 import com.example.onlineliquorfinal.URL.url;
 import com.example.onlineliquorfinal.serverresponse.SignUpResponse;
 
@@ -22,9 +27,17 @@ import retrofit2.Response;
 
 public class SignupActivity extends AppCompatActivity {
 
+
+
+
+
         private EditText etfname, etlname, etaddress, etphno, etemail, etusername,etpassword, etconfirmpass;
         private Button btnsignup;
         private TextView tvlogin;
+
+    private ShakeDetector mShakeDetector;
+    private SensorManager mSensorManager;
+    private Sensor mAccelerometer;
 
 
     @Override
@@ -42,6 +55,24 @@ public class SignupActivity extends AppCompatActivity {
         etconfirmpass=findViewById(R.id.cpassword);
         btnsignup=findViewById(R.id.btn_signup);
         tvlogin=findViewById(R.id.tvlogin);
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        mShakeDetector = new ShakeDetector(new ShakeDetector.OnShakeListener() {
+            @Override
+            public void onShake() {
+
+                etfname.setText("");
+                etlname.setText("");
+                etaddress.setText("");
+                etphno.setText("");
+                etemail.setText("");
+                etusername.setText("");
+                etpassword.setText("");
+                etconfirmpass.setText("");
+
+            }
+        });
 
         tvlogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,6 +98,19 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mShakeDetector, mAccelerometer, SensorManager.SENSOR_DELAY_UI);
+    }
+
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(mShakeDetector);
+        super.onPause();
+    }
+
 
     private void signup() {
 

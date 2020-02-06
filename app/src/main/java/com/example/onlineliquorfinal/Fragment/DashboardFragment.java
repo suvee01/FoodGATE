@@ -125,8 +125,8 @@ public class DashboardFragment extends Fragment {
 
 
 //    private void sensorGyro() {
-//        sensorManager=(SensorManager)context.getSystemService(SENSOR_SERVICE);
-//        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+//        sensorManager=(SensorManager)context.getSystemService(SENSOR_SERVGYROSCOPEICE);
+//        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_);
 //        SensorEventListener sensorEventListener= new SensorEventListener() {
 //            @Override
 //            public void onSensorChanged(SensorEvent event) {
