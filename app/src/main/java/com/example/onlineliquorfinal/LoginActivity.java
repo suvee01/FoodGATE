@@ -81,8 +81,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         LoginWithGG = findViewById(R.id.btnGG);
         Forgetpass = findViewById(R.id.forgot_password);
         signup = findViewById(R.id.tvsignup);
-        GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this);
 
+        GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this);
+        //Werables.. coding....
         builder.addApi(Wearable.API);
         builder.addConnectionCallbacks(this);
         builder.addOnConnectionFailedListener(this);
@@ -169,7 +170,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         if (loginBLL.checkUser(username, password)) {
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
+            DisplayNotification();
             finish();
+
+
 
         } else {
             Toast.makeText(this, "Either username or password is incorrect", Toast.LENGTH_SHORT).show();
@@ -208,12 +212,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         unregisterReceiver(broadCastReceiver);
         if (googleApiClient != null && googleApiClient.isConnected()) {
             googleApiClient.disconnect();
-        }
+        }   super.onStop();
     }
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-
         sendMessage();
     }
 
