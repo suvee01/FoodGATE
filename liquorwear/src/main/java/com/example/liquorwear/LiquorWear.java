@@ -11,46 +11,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LiquorWear extends WearableActivity {
-    private EditText et1,et2;
-    private Button login;
 
 
-
+    private TextView mTextView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liquor_wear);
 
-        et1 = findViewById(R.id.username);
-        et2 = findViewById(R.id.password);
-
-        // Enables Always-on
-        setAmbientEnabled();
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Login();
-            }
-        });
+        mTextView = (TextView) findViewById(R.id.text);
+        String message = getIntent().getStringExtra("message");
+        if(message==null || message.equalsIgnoreCase("")){
+            message = "This is just a test";
+        }
     }
 
     private void Login() {
-        String username = et1.getText().toString();
-        String password = et2.getText().toString();
 
-        LoginBLL loginBLL = new LoginBLL();
 
-//        StrictModeClass.StrictMode();
-//        if (loginBLL.checkUser(username, password)) {
-//            Intent intent = new Intent(LiquorWear.this, DashActivity.class);
-//            startActivity(intent);
-//            finish();
-//
-//        } else {
-//            Toast.makeText(this, "Either username or password is incorrect", Toast.LENGTH_SHORT).show();
-//            et1.requestFocus();
-//        }
 
     }
 }

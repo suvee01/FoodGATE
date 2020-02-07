@@ -1,5 +1,7 @@
 package com.example.onlineliquorfinal;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -19,6 +21,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
@@ -34,6 +37,12 @@ import com.example.onlineliquorfinal.bll.LoginBLL;
 
 import com.example.onlineliquorfinal.createChannel.CreateChannel;
 import com.example.onlineliquorfinal.strictmode.StrictModeClass;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.NodeApi;
+import com.google.android.gms.wearable.Wearable;
 
 import broadcastreceiver.BroadCastReceiver;
 import retrofit2.Call;
@@ -41,131 +50,114 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Url;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    private EditText et1,et2;
+
+    GoogleApiClient googleApiClient = null;
+    public static final String TAG = "MyDataMap.....";
+    public static final String WEARABLE_DATA_PATH = "/wearable/data/path";
+    private EditText et1, et2;
     private Button login;
     private TextView LoginWithGG;
     private TextView signup, Forgetpass;
     public SensorManager sensorManager;
     private NotificationManagerCompat notificationManagerCompat;
     Vibrator vibrator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        notificationManagerCompat= NotificationManagerCompat.from(this);
-        CreateChannel channel= new CreateChannel(this);
+        notificationManagerCompat = NotificationManagerCompat.from(this);
+        CreateChannel channel = new CreateChannel(this);
         channel.createChannel();
         proximity();
-        sensorLight();
+
         et1 = findViewById(R.id.username);
         et2 = findViewById(R.id.password);
         login = findViewById(R.id.btn_login);
-        LoginWithGG=findViewById(R.id.btnGG);
-        Forgetpass=findViewById(R.id.forgot_password);
-        signup=findViewById(R.id.tvsignup);
+        LoginWithGG = findViewById(R.id.btnGG);
+        Forgetpass = findViewById(R.id.forgot_password);
+        signup = findViewById(R.id.tvsignup);
+        GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this);
+
+        builder.addApi(Wearable.API);
+        builder.addConnectionCallbacks(this);
+        builder.addOnConnectionFailedListener(this);
+        googleApiClient = builder.build();
 
 
         Forgetpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(LoginActivity.this, ForgetPassActivity.class );
+                Intent i = new Intent(LoginActivity.this, ForgetPassActivity.class);
                 startActivity(i);
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i= new Intent(LoginActivity.this, SignupActivity.class );
+                Intent i = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(i);
             }
         });
-            LoginWithGG.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(LoginActivity.this,"You have clicked on Google Login",Toast.LENGTH_SHORT).show();
-                }
-            });
+        LoginWithGG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(LoginActivity.this, "You have clicked on Google Login", Toast.LENGTH_SHORT).show();
+            }
+        });
 //    }
 //
 
-       login.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               login();
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+                sensorLight();
+                DisplayNotification();
 
-               DisplayNotification();
-
-           }
-       });
-}
+            }
+        });
+    }
 
     private void proximity() {
 
-        sensorManager = (SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        Sensor sensor=sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-        SensorEventListener sensorEventListener= new SensorEventListener() {
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        SensorEventListener sensorEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
-                if (event.values[0]<=4){
-                   // lout();
+                if (event.values[0] <= 4) {
                 }
             }
 
             @Override
             public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
             }
         };
     }
 
-//    private void lout() {
-//
-//        AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-//        builder.setMessage("Are you sure?")
-//                .setPositiveButton("yes", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        SharedPreferences sharedPreferences=getActivity().getSharedPreferences("User", Context.MODE_PRIVATE);
-//                        String token=sharedPreferences.getString("token","");
-//                        SharedPreferences.Editor editor=sharedPreferences.edit();
-//                        editor.putString("token"," ");
-//                        editor.commit();
-//
-//                        Intent intent =new Intent(getActivity(),LoginActivity.class);
-//                        startActivity(intent);
-//
-//                    }
-//                })
-//                .setNegativeButton("cancel",null);
-//
-//        AlertDialog alertDialog=builder.create();
-//        alertDialog.show();
-
-
     private void sensorLight() {
-        sensorManager=(SensorManager)getSystemService(SENSOR_SERVICE);
-        Sensor sensor= sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        SensorEventListener sensorEventListener= new SensorEventListener() {
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        Sensor sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        SensorEventListener sensorEventListener = new SensorEventListener() {
             @Override
             public void onSensorChanged(SensorEvent event) {
-                if(event.sensor.getType()==Sensor.TYPE_LIGHT){
-                    Toast.makeText(LoginActivity.this,"onSensor Change:" + event.values[0], Toast.LENGTH_SHORT).show();
+                if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+                    Toast.makeText(LoginActivity.this, "Lights on:" + event.values[0], Toast.LENGTH_SHORT).show();
 
                 }
             }
 
             @Override
             public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
             }
         };
-        sensorManager.registerListener(sensorEventListener,sensor,SensorManager.SENSOR_DELAY_NORMAL);
-           }
-
+        sensorManager.registerListener(sensorEventListener, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
 
     private void login() {
         String username = et1.getText().toString();
@@ -182,35 +174,102 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this, "Either username or password is incorrect", Toast.LENGTH_SHORT).show();
             et1.requestFocus();
-            Vibrator vibrator=(Vibrator) getSystemService(VIBRATOR_SERVICE);
+            Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             vibrator.vibrate(2000);
         }
     }
 
     private void DisplayNotification() {
 
-        Notification notification= new NotificationCompat.Builder(this,CreateChannel.CHANNEL_1)
-        .setSmallIcon(R.drawable.ic_notifications_none_black_24dp)
-         .setContentTitle("Liquor Mart")
-         .setContentText("Login Success:" + et1.getText().toString())
-           .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+        Notification notification = new NotificationCompat.Builder(this, CreateChannel.CHANNEL_1)
+                .setSmallIcon(R.drawable.ic_notifications_none_black_24dp)
+                .setContentTitle("Liquor Mart")
+                .setContentText("Login Success:" + et1.getText().toString())
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .build();
 
-        notificationManagerCompat.notify(1,notification);
+        notificationManagerCompat.notify(1, notification);
 
 
     }
- BroadCastReceiver broadCastReceiver= new BroadCastReceiver(this);
 
-    protected void onStart(){
+    BroadCastReceiver broadCastReceiver = new BroadCastReceiver(this);
+
+    protected void onStart() {
         super.onStart();
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        registerReceiver(broadCastReceiver,intentFilter);
+        registerReceiver(broadCastReceiver, intentFilter);
+        googleApiClient.connect();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         unregisterReceiver(broadCastReceiver);
+        if (googleApiClient != null && googleApiClient.isConnected()) {
+            googleApiClient.disconnect();
+        }
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+        sendMessage();
+    }
+
+    private void sendMessage() {
+
+        if (googleApiClient.isConnected()) {
+            String message = ((TextView) findViewById(R.id.text)).getText().toString();
+            if (message == null || message.equalsIgnoreCase("")) {
+                message = "Hello World";
+            }
+            new SendMessageToDataLayer(WEARABLE_DATA_PATH, message).start();
+
+
+        } else {
+
+        }
+    }
+
+    public void sendMessageOnClick(View view) {
+        sendMessage();
+    }
+
+
+    public class SendMessageToDataLayer extends Thread {
+        String path;
+        String message;
+
+        public SendMessageToDataLayer(String path, String message) {
+            this.path = path;
+            this.message = message;
+        }
+
+        public void run() {
+            NodeApi.GetConnectedNodesResult nodesList = Wearable.NodeApi.getConnectedNodes(googleApiClient).await();
+            for (Node node : nodesList.getNodes()) {
+                MessageApi.SendMessageResult messageResult = Wearable.MessageApi.sendMessage(googleApiClient, node.getId(), path, message.getBytes()).await();
+                if (messageResult.getStatus().isSuccess()) {
+                    //print success log
+                    Log.v(TAG, "Message: successfully sent to " + node.getDisplayName());
+                    Log.v(TAG, "Message: Node Id is " + node.getId());
+                    Log.v(TAG, "Message: Node size is " + nodesList.getNodes().size());
+                } else {
+                    //print failure log
+                    Log.v(TAG, "Error while sending Message");
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 }
