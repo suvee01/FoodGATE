@@ -25,10 +25,7 @@ public class LiquorWear extends WearableActivity {
             message = "This is just a test";
         }
     }
-
     private void Login() {
-
-
 
     }
 }
