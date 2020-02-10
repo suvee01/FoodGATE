@@ -53,9 +53,7 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
     private ActionBarDrawerToggle mToggle;
     private FrameLayout frameLayout;
     private  TextView hname;
-    SearchView searchView;
-    public static List<CategoryModel> lstcat= new ArrayList<>();
-    public static List<ProductModel> lstproduct = new ArrayList<>();
+
     private static final String TAG="DashboardActivity";
 
     private TextView hUsername;
@@ -78,7 +76,6 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         hUsername = headerView.findViewById(R.id.husername);
         hEmail = headerView.findViewById(R.id.hemail);
-        searchView=(SearchView)findViewById(R.id.search);
 
         API api = url.getInstance().create(API.class);
         Call<User> getuserdetails = api.getUserDetails(url.token);
@@ -166,6 +163,24 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         Intent i= new Intent(DashboardActivity.this,LoginActivity.class);
         startActivity(i);
     }
+   // public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater=getMenuInflater();
+//        inflater.inflate(R.menu.example_item,menu);
+//        MenuItem searchItem=menu.findItem(R.id.search);
+//        SearchView searchView =(SearchView) searchItem.getActionView();
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                ProductAdapter.getFilter().filter(newText);
+//                return false;
+//            }
+//        });
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

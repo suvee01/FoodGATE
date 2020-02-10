@@ -2,14 +2,9 @@ package com.example.onlineliquorfinal.Fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,14 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.onlineliquorfinal.DashboardActivity;
-import com.example.onlineliquorfinal.ProductDetailActivity;
 import com.example.onlineliquorfinal.R;
 import com.example.onlineliquorfinal.URL.url;
 
@@ -41,10 +32,6 @@ import Model.ProductModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static android.content.Context.SENSOR_SERVICE;
-import static com.example.onlineliquorfinal.DashboardActivity.lstcat;
-import static com.example.onlineliquorfinal.DashboardActivity.lstproduct;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,6 +48,11 @@ public class DashboardFragment extends Fragment {
     }
     private RecyclerView cat_recyclerview, rv_product;
     private TextView tvgyro;
+    SearchView searchView;
+
+    private List<CategoryModel> AllCategoryList = new ArrayList<>();
+    private List<ProductModel> AllProductsList = new ArrayList<>();
+    private List<ProductModel> SearchedProductList = new ArrayList<ProductModel>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,10 +63,38 @@ public class DashboardFragment extends Fragment {
 
         tvgyro= view.findViewById(R.id.tvgyro);
         rv_product= view.findViewById(R.id.recyproduct);
+        searchView = view.findViewById(R.id.search);
+
         rv_product.setLayoutManager(new GridLayoutManager(getContext(),3));
 
         cat_recyclerview= view.findViewById(R.id.cat_recyclerview);
         cat_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.isEmpty()){
+                    SearchedProductList = AllProductsList;
+                }else {
+                    SearchedProductList = new ArrayList<>();
+                    for(ProductModel product:AllProductsList){
+                        if(product.getProductname().contains(newText)){
+                            SearchedProductList.add(product);
+                        }
+                    }
+                }
+//                rv_product.getAdapter().notifyDataSetChanged();
+//                rv_product.getAdapter().notify();
+                ProductAdapter adapter = new ProductAdapter(context,SearchedProductList);
+                rv_product.setAdapter(adapter);
+                return false;
+            }
+        });
 
 
         CategoryAPI productapi= url.getInstance().create(CategoryAPI.class);
@@ -83,8 +103,9 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
                 Toast.makeText(context,"Product List Fetched",Toast.LENGTH_LONG).show();
-                lstproduct=response.body();
-                ProductAdapter pa=new ProductAdapter(context,lstproduct);
+                AllProductsList =response.body();
+                SearchedProductList = AllProductsList;
+                ProductAdapter pa=new ProductAdapter(context, SearchedProductList);
                 rv_product.setAdapter(pa);
             }
 
@@ -102,8 +123,8 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onResponse(Call<List<CategoryModel>> call, Response<List<CategoryModel>> response) {
                 Toast.makeText(context,"Category List Fetched",Toast.LENGTH_LONG).show();
-                lstcat = response.body();
-                CategoryAdapter ca = new CategoryAdapter(context,lstcat);
+                AllCategoryList = response.body();
+                CategoryAdapter ca = new CategoryAdapter(context,AllCategoryList);
                 cat_recyclerview.setAdapter(ca);
             }
 

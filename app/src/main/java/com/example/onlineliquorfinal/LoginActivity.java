@@ -171,6 +171,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
             DisplayNotification();
+
             finish();
 
 
@@ -181,7 +182,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
             vibrator.vibrate(2000);
         }
+
     }
+
+
 
     private void DisplayNotification() {
 
