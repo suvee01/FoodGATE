@@ -43,7 +43,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     public void onBindViewHolder(@NonNull CartViewHolder holder, final int position) {
         holder.img_product.setImageResource(Integer.parseInt(productlst.get(position).getProductimg()));
         holder.txt_productname.setText(productlst.get(position).getProductname());
-        holder.txtproduct_desc.setText(productlst.get(position).getProductdesc());
+        holder.txtproduct_quant.setText(productlst.get(position).getProductdesc());
         holder.txtproduct_rate.setText(new StringBuilder("Rs").append(productlst.get(position).rate));
         holder.txtamount.setNumber(String.valueOf(productlst.get(position).amount));
 
@@ -69,7 +69,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     class CartViewHolder extends RecyclerView.ViewHolder
     {
         ImageView img_product;
-        TextView txt_productname,txtproduct_desc,txtproduct_rate;
+        TextView txt_productname,txtproduct_quant,txtproduct_rate;
         ElegantNumberButton txtamount;
 
         public CartViewHolder(@NonNull View itemView) {
@@ -78,7 +78,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             img_product=(ImageView)itemView.findViewById(R.id.cartimgproduct);
             txt_productname=(TextView)itemView.findViewById(R.id.txtcproname);
             txtamount=(ElegantNumberButton)itemView.findViewById(R.id.txtamount);
-            txtproduct_desc=(TextView)itemView.findViewById(R.id.txtcprodesc);
+            txtproduct_quant=(TextView)itemView.findViewById(R.id.txtquant);
             txtproduct_rate=(TextView)itemView.findViewById(R.id.txtcprate);
         }
     }

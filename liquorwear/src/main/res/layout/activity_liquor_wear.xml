@@ -16,11 +16,35 @@
         android:padding="@dimen/inner_frame_layout_padding"
         app:boxedEdges="all">
 
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hello_world" />
+            android:hint="Username"
+            android:layout_marginBottom="20dp"
+            android:padding="16dp"
+            android:textSize="10sp"/>
+
+        <EditText
+            android:id="@+id/pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:padding="16dp"
+            android:textSize="10sp"
+            android:inputType="textPassword"
+            android:hint="Password"
+            />
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="100dp"
+            android:text="LOGIN"
+            android:textAllCaps="false"
+
+            android:textSize="30sp"
+           />
 
     </FrameLayout>
 </androidx.wear.widget.BoxInsetLayout>

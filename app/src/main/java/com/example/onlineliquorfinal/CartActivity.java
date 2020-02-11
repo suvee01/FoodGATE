@@ -30,7 +30,6 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
         cframelayout=findViewById(R.id.cartframelayout);
         setFragment(new CartFragment());
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 

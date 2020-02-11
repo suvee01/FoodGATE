@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.NotificationCompat.WearableExtender;
 
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -21,6 +22,7 @@ import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -118,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onClick(View v) {
                 login();
                 sensorLight();
-                DisplayNotification();
+
 
             }
         });
@@ -164,15 +166,24 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         String username = et1.getText().toString();
         String password = et2.getText().toString();
 
+        if(TextUtils.isEmpty(et1.getText())){
+            et1.setError("Enter Username");
+            return;
+        }
+        else if(TextUtils.isEmpty(et2.getText())){
+            et2.setError("Enter Password");
+            return;
+        }
+
         LoginBLL loginBLL = new LoginBLL();
 
         StrictModeClass.StrictMode();
         if (loginBLL.checkUser(username, password)) {
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
-            DisplayNotification();
-
             finish();
+            DisplayNotification();
+            sendMessage();
 
 
 
@@ -221,15 +232,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-        sendMessage();
+
     }
 
     private void sendMessage() {
 
         if (googleApiClient.isConnected()) {
             String message = ((TextView) findViewById(R.id.text)).getText().toString();
-            if (message == null || message.equalsIgnoreCase("")) {
-                message = "Hello World";
+            if (message == null || message.equalsIgnoreCase("Login Success")) {
+                message = "Login Success" + et1.getText().toString();
             }
             new SendMessageToDataLayer(WEARABLE_DATA_PATH, message).start();
 
@@ -238,12 +249,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         }
     }
-
-    public void sendMessageOnClick(View view) {
-        sendMessage();
-    }
-
-
     public class SendMessageToDataLayer extends Thread {
         String path;
         String message;

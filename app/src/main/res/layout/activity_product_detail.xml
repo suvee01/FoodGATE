@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/bg_login"
     android:name="android.support.PARENT_ACTIVITY"
     tools:context=".ProductDetailActivity">
@@ -55,6 +56,19 @@
 
                 android:padding="8dp"
                 android:text="Rate" />
+
+            <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
+                android:id="@+id/txtamount"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                app:initialNumber="1"
+                app:finalNumber="100"
+                app:backGroundColor="@color/lightorange"
+                app:textColor="@color/login_form_details"
+                app:textSize="10sp" >
+
+            </com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
             <Button
                 android:id="@+id/btnorder"

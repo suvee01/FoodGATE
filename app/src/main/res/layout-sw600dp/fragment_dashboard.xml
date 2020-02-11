@@ -13,6 +13,13 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp">
 
+    <SearchView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:queryHint="Search Here"
+        android:id="@+id/search"
+        android:iconifiedByDefault="false"/>
 
 
 
