@@ -45,16 +45,19 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
 
 
         CategoryModel cat = lstcat.get(position);
-
         String imgPath = url.BASE_URL + "uploads/" + lstcat.get(position).getCatImg();
         StrictMode();
+
         try {
             URL url=new URL(imgPath);
             viewHolder.category_icon.setImageBitmap(BitmapFactory.decodeStream((InputStream) url.getContent()));
         } catch (Exception e) {
         }
+
         viewHolder.category_name.setText(cat.getCategory());
+
     }
+
     private void StrictMode() {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

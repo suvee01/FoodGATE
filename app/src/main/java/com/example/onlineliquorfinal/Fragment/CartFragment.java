@@ -28,6 +28,7 @@ public class CartFragment extends Fragment {
 
 
 
+
     public CartFragment() {
         // Required empty public constructor
     }
@@ -46,12 +47,16 @@ public class CartFragment extends Fragment {
         recy_cart.setHasFixedSize(true);
 
         btn_pro_order=view.findViewById(R.id.btnplaceorder);
+        loadCartItems();
 
         return (view);
 
     }
 
-
+    private void loadCartItems() {
     }
+
+
+}
 
 

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -69,6 +70,7 @@ public class DashboardFragment extends Fragment {
 
         cat_recyclerview= view.findViewById(R.id.cat_recyclerview);
         cat_recyclerview.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
+
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
