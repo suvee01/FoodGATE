@@ -4,6 +4,7 @@ import com.example.onlineliquorfinal.serverresponse.SignUpResponse;
 
 import java.util.List;
 
+import Model.CartModel;
 import Model.LoginResponse;
 import Model.User;
 import retrofit2.Call;
@@ -24,5 +25,8 @@ public interface API {
 
  @GET("users/me")
   Call<User> getUserDetails(@Header("authorization")String token);
+
+ @GET("/users/cart")
+ Call<List<CartModel>> getbyid(@Header("Authorization") String token);
 
 }

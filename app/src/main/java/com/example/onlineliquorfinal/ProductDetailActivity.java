@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.onlineliquorfinal.Fragment.CartFragment;
 import com.example.onlineliquorfinal.Fragment.DashboardFragment;
 import com.example.onlineliquorfinal.Fragment.ProductDetailFragment;
@@ -35,6 +36,7 @@ public class ProductDetailActivity extends AppCompatActivity {
     private Button Order;
 
     private TextView textViewName, textViewDesc, textViewRate;
+    private ElegantNumberButton quantity;
 
 
     @Override
@@ -43,11 +45,32 @@ public class ProductDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_detail);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         product_img= findViewById(R.id.productimg);
         textViewName = findViewById(R.id.proname);
         textViewDesc = findViewById(R.id.prodesc);
         textViewRate = findViewById(R.id.prorate);
+
+        quantity =findViewById(R.id.txtamount);
+        quantity.setOnClickListener(new ElegantNumberButton.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String product_detail_quantity = quantity.getNumber();
+            }
+        });
+        quantity.getNumber();
         Order= findViewById(R.id.btnorder);
+        Order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductDetailActivity.this, CartActivity.class);
+                intent.putExtra("textViewName",textViewName.getText().toString());
+                intent.putExtra("textViewRate",textViewRate.getText().toString());
+                intent.putExtra("product_img",product_image);
+                intent.putExtra("quantity",quantity.getNumber());
+                startActivity(intent);
+            }
+        });
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
 
@@ -69,13 +92,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
 
 
-        Order.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i= new Intent(ProductDetailActivity.this, CartActivity.class );
-                startActivity(i);
-            }
-        });
+
 
 
 

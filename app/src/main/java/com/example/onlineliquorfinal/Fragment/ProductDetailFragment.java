@@ -19,7 +19,6 @@ public class ProductDetailFragment extends Fragment {
     String product_name;
     String product_desc;
     int product_rate;
-
     TextView textView_product_name;
 
     public ProductDetailFragment() {

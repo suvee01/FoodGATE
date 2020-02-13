@@ -52,7 +52,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.http.Url;
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity {
 
 
     GoogleApiClient googleApiClient = null;
@@ -84,12 +84,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Forgetpass = findViewById(R.id.forgot_password);
         signup = findViewById(R.id.tvsignup);
 
-        GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this);
-        //Werables.. coding....
-        builder.addApi(Wearable.API);
-        builder.addConnectionCallbacks(this);
-        builder.addOnConnectionFailedListener(this);
-        googleApiClient = builder.build();
+//        GoogleApiClient.Builder builder = new GoogleApiClient.Builder(this);
+//        //Werables.. coding....
+//        builder.addApi(Wearable.API);
+//        builder.addConnectionCallbacks(this);
+//        builder.addOnConnectionFailedListener(this);
+//        googleApiClient = builder.build();
 
 
         Forgetpass.setOnClickListener(new View.OnClickListener() {
@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             @Override
             public void onSensorChanged(SensorEvent event) {
                 if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
-                    Toast.makeText(LoginActivity.this, "Lights on:" + event.values[0], Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivity.this, "Lights on:" + event.values[0], Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -166,11 +166,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         String username = et1.getText().toString();
         String password = et2.getText().toString();
 
-        if(TextUtils.isEmpty(et1.getText())){
+        if (TextUtils.isEmpty(et1.getText())) {
             et1.setError("Enter Username");
             return;
-        }
-        else if(TextUtils.isEmpty(et2.getText())){
+        } else if (TextUtils.isEmpty(et2.getText())) {
             et2.setError("Enter Password");
             return;
         }
@@ -183,8 +182,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             startActivity(intent);
             finish();
             DisplayNotification();
-            sendMessage();
-
+            //  sendMessage();
 
 
         } else {
@@ -195,7 +193,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         }
 
     }
-
 
 
     private void DisplayNotification() {
@@ -218,7 +215,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onStart();
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         registerReceiver(broadCastReceiver, intentFilter);
-        googleApiClient.connect();
+        //googleApiClient.connect();
     }
 
     @Override
@@ -227,28 +224,29 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         unregisterReceiver(broadCastReceiver);
         if (googleApiClient != null && googleApiClient.isConnected()) {
             googleApiClient.disconnect();
-        }   super.onStop();
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-    }
-
-    private void sendMessage() {
-
-        if (googleApiClient.isConnected()) {
-            String message = ((TextView) findViewById(R.id.text)).getText().toString();
-            if (message == null || message.equalsIgnoreCase("Login Success")) {
-                message = "Login Success" + et1.getText().toString();
-            }
-            new SendMessageToDataLayer(WEARABLE_DATA_PATH, message).start();
-
-
-        } else {
-
         }
+        super.onStop();
     }
+
+//    @Override
+//    public void onConnected(@Nullable Bundle bundle) {
+//
+//    }
+
+    //    private void sendMessage() {
+//
+//        if (googleApiClient.isConnected()) {
+//            String message = ((TextView) findViewById(R.id.text)).getText().toString();
+//            if (message == null || message.equalsIgnoreCase("Login Success")) {
+//                message = "Login Success" + et1.getText().toString();
+//            }
+//            new SendMessageToDataLayer(WEARABLE_DATA_PATH, message).start();
+//
+//
+//        } else {
+//
+//        }
+//    }
     public class SendMessageToDataLayer extends Thread {
         String path;
         String message;
@@ -274,14 +272,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         }
     }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 }
+
+
+
+

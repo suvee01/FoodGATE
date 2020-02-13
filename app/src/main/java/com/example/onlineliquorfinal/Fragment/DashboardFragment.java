@@ -102,7 +102,7 @@ public class DashboardFragment extends Fragment {
         productcall.enqueue(new Callback<List<ProductModel>>() {
             @Override
             public void onResponse(Call<List<ProductModel>> call, Response<List<ProductModel>> response) {
-                Toast.makeText(context,"Product List Fetched",Toast.LENGTH_LONG).show();
+               // Toast.makeText(context,"Product List Fetched",Toast.LENGTH_LONG).show();
                 AllProductsList =response.body();
                 SearchedProductList = AllProductsList;
                 ProductAdapter pa=new ProductAdapter(context, SearchedProductList);
@@ -122,7 +122,7 @@ public class DashboardFragment extends Fragment {
         categorycall.enqueue(new Callback<List<CategoryModel>>() {
             @Override
             public void onResponse(Call<List<CategoryModel>> call, Response<List<CategoryModel>> response) {
-                Toast.makeText(context,"Category List Fetched",Toast.LENGTH_LONG).show();
+               // Toast.makeText(context,"Category List Fetched",Toast.LENGTH_LONG).show();
                 AllCategoryList = response.body();
                 CategoryAdapter ca = new CategoryAdapter(context,AllCategoryList);
                 cat_recyclerview.setAdapter(ca);

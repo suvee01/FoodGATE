@@ -17,15 +17,15 @@ import com.example.liquorwear.strictmode.StrictModeClass;
 public class LiquorWear extends WearableActivity {
 
 
-    private EditText username,password;
+    private EditText et1,et2;
     private Button login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_liquor_wear);
 
-        username = (EditText) findViewById(R.id.username);
-        password=(EditText) findViewById(R.id.pass);
+        et1 = (EditText) findViewById(R.id.username);
+        et2=(EditText) findViewById(R.id.password);
         login=(Button)findViewById(R.id.btn_login);
 
 //        String message = getIntent().getStringExtra("Login Success");
@@ -43,21 +43,21 @@ public class LiquorWear extends WearableActivity {
 
     private void dashlogin() {
 
-        String susername = username.getText().toString();
-        String spassword = password.getText().toString();
+        String username = et1.getText().toString();
+        String password = et2.getText().toString();
 
         LoginBLL loginBLL = new LoginBLL();
 
         StrictModeClass.StrictMode();
-        if (loginBLL.checkUser(susername, spassword)) {
-//            Intent intent = new Intent(LiquorWear.this, DashActivity.class);
-//            startActivity(intent);
-//            finish();
+        if (loginBLL.checkUser(username, password)) {
+            Intent intent = new Intent(LiquorWear.this, DashActivity.class);
+            startActivity(intent);
+            finish();
             Toast.makeText(this, url.token, Toast.LENGTH_SHORT).show();
 
         } else {
             Toast.makeText(this, "Either username or password is incorrect", Toast.LENGTH_SHORT).show();
-            username.requestFocus();
+            et1.requestFocus();
 
         }
     }

@@ -14,9 +14,9 @@ public interface API {
  @FormUrlEncoded
  @POST("/users/login")
  Call<SignUpResponse> checkUser(@Field("username") String username, @Field("password") String password);
-
-@POST ("/users/signup")
- Call<SignUpResponse> register(@Body User regUser);
+//
+//@POST ("/users/signup")
+// Call<SignUpResponse> register(@Body User regUser);
 
 
 

@@ -83,8 +83,12 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         getuserdetails.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                hUsername.setText(response.body().getFirstName());
-                hEmail.setText(response.body().getEmail());
+                if(response.code()==200){
+                    hUsername.setText(response.body().getFirstName());
+                    hEmail.setText(response.body().getEmail());
+                }else {
+                    Toast.makeText(DashboardActivity.this,response.errorBody().toString(),Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
