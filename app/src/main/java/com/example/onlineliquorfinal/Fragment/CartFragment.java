@@ -17,6 +17,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.onlineliquorfinal.CartActivity;
+import com.example.onlineliquorfinal.CheckoutActivity;
+import com.example.onlineliquorfinal.DashboardActivity;
 import com.example.onlineliquorfinal.R;
 import com.example.onlineliquorfinal.URL.url;
 
@@ -37,7 +39,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class CartFragment extends Fragment {
 
     RecyclerView recy_cart;
-    Button btn_pro_order, btncontinueshop;
+    Button btn_pro_order, btncontinueshop, checkout;
     
     public CartFragment() {
         // Required empty public constructor
@@ -54,6 +56,7 @@ public class CartFragment extends Fragment {
         recy_cart.setLayoutManager(new LinearLayoutManager(getContext(),RecyclerView.HORIZONTAL,false));
         recy_cart.setHasFixedSize(true);
         btncontinueshop= view.findViewById(R.id.btnback);
+        checkout=view.findViewById(R.id.btnplaceorder);
 
         btn_pro_order=view.findViewById(R.id.btnplaceorder);
         getCart();
@@ -61,7 +64,16 @@ public class CartFragment extends Fragment {
         btncontinueshop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent i= new Intent(getActivity(CartActivity))
+                    Intent i= new Intent(getContext(), DashboardActivity.class);
+                    startActivity(i);
+            }
+        });
+
+        checkout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(getContext(), CheckoutActivity.class);
+                startActivity(i);
             }
         });
         return (view);

@@ -39,7 +39,7 @@ public class CartActivity extends AppCompatActivity {
     String quantity;
     ImageButton remove;
     private FrameLayout cframelayout;
-    private TextView textViewName,textViewRate,textViewQuantity, textViewTotal;
+    private TextView textViewName,textViewRate,textViewQuantity, textViewTotal,totaltxt;
 
 
 
@@ -54,6 +54,7 @@ public class CartActivity extends AppCompatActivity {
         textViewRate = findViewById(R.id.txtcprate);
         textViewQuantity = findViewById(R.id.txtquant);
         textViewTotal= findViewById(R.id.total);
+        totaltxt=findViewById(R.id.totalamount);
         remove=findViewById(R.id.cart_remove);
 
         ImageButton imageButton = findViewById(R.id.cart_remove);
@@ -65,8 +66,10 @@ public class CartActivity extends AppCompatActivity {
                 textViewRate.setText("");
                 textViewQuantity.setText("");
                 textViewTotal.setText("");
+                totaltxt.setText("");
                 product_img.setVisibility(View.INVISIBLE);
                 remove.setVisibility(View.INVISIBLE);
+
 
             }
         });
