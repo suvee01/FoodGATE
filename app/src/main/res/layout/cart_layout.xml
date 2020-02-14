@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:text="Rs 300"
                     android:layout_weight="5"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"/>
 
                 <TextView

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.Dash;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.model.Dash;
 public class CheckoutActivity extends AppCompatActivity {
 
     Button order;
+    TextView quantity,total ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,9 @@ public class CheckoutActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         order= findViewById(R.id.order);
+        quantity= findViewById(R.id.quantity);
+        total=findViewById(R.id.totalcharge);
+
 
 
         order.setOnClickListener(new View.OnClickListener() {
