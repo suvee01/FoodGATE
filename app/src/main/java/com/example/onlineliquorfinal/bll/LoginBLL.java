@@ -8,10 +8,16 @@ import retrofit2.Call;
 import retrofit2.Response;
 
 public class LoginBLL {
-
+    private String username;
+    private String password;
     boolean isSuccess = false;
 
-    public boolean checkUser(String username, String password) {
+    public LoginBLL(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public boolean checkUser() {
 
         API api = url.getInstance().create(API.class);
         Call<SignUpResponse> usersCall = api.checkUser(username, password);

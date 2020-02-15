@@ -174,10 +174,10 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        LoginBLL loginBLL = new LoginBLL();
+        LoginBLL loginBLL = new LoginBLL(username,password);
 
         StrictModeClass.StrictMode();
-        if (loginBLL.checkUser(username, password)) {
+        if (loginBLL.checkUser()) {
             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
             startActivity(intent);
             finish();

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp"
+    android:id="@+id/cartrela"
+    android:background="@color/lightorange"
+    tools:context=".Fragment.CartFragment">
+
+
+    <FrameLayout
+        android:id="@+id/cframelayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="300dp" />
+
+
+    <Button
+        android:id="@+id/btnplaceorder"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="950dp"
+        android:background="@color/orange"
+        android:text="Checkout"
+        android:textColor="@color/login_form_details" />
+    <Button
+        android:id="@+id/btnback"
+        android:layout_width="220dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="220dp"
+        android:background="@color/green"
+        android:text=" Continue Shopping"
+        android:textColor="@color/login_form_details" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btnplaceorder"
+        >
+
+
+
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+</RelativeLayout>
