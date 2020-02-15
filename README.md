@@ -65,9 +65,13 @@ o	Notification when the user has logged in
 An API is an application programming interface. It is a set of rules that allow programs to talk to each other. The developer creates the API on the server and allows the client to talk to it. REST determines how the API looks like. It stands for “Representational State Transfer”. It is a set of rules that developers follow when they create their API. One of these rules states that you should be able to get a piece of data (called a resource) when you link to a specific URL.
 
 # POST
+For a POST request, to add form parameters/values, the getParams() method needs to be overridden and a Map needs to be returned.
 # GET
+Making GET Requests is simple. The example below uses JsonObjectRequest. It prepares a JsonObjectRequest and passes and then adds it to RequestQueue. The JsonObject accepts 4 parameters (Http method, Url, Json values, Response Listener – Invoked on success, Error Listener – Invoked on failure).
 # DELETE
+For DELETE request, we should pass id, it is used to delete the data.
 # PUT
+For PUT request, we need to Pass id. It is used to update the data
 
 
 # Conclusion
