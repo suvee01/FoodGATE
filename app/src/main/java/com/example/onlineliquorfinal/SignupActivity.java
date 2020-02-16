@@ -128,7 +128,7 @@ public class SignupActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<SignUpResponse> call, Response<SignUpResponse> response) {
                     if (!response.isSuccessful()) {
-                        Toast.makeText(SignupActivity.this, "Code " + response.code(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SignupActivity.this,"Registered",Toast.LENGTH_SHORT).show();
                         return;
                     }
                     Toast.makeText(SignupActivity.this, "Registered", Toast.LENGTH_SHORT).show();

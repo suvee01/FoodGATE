@@ -10,7 +10,7 @@
    <TextView
        android:layout_width="match_parent"
        android:layout_height="match_parent"
-       android:text="List of Product: 30"
+       android:text="List of Pr oduct: 30"
        android:textStyle="bold"
        android:textSize="15sp"
        android:layout_marginBottom="20dp"

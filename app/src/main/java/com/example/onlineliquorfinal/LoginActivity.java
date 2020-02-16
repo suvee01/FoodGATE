@@ -150,7 +150,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onSensorChanged(SensorEvent event) {
                 if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
-//                    Toast.makeText(LoginActivity.this, "Lights on:" + event.values[0], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Lights on:" + event.values[0], Toast.LENGTH_SHORT).show();
 
                 }
             }

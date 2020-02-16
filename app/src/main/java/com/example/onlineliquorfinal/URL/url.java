@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class url {
 
   public static final String BASE_URL= "http://10.0.2.2:3000/";
- // public static final String BASE_URL= "http://127.0.0.1:3000/";
+ //public static final String BASE_URL= "http://172.26.0.196:3000/";
 //   public static final String BASE_URL= "http://172.26.0.195:3000/"; //laptop ip address for sensor
    //public static final String BASE_URL= "http:// 192.168.137.1:3000/"; //laptop ip address for sensor
     public static String token="Bearer ";
