@@ -36,30 +36,13 @@ public class LiquorWear extends WearableActivity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              dashlogin();
+                Intent intent = new Intent(LiquorWear.this, DashActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
 
-    private void dashlogin() {
 
-        String username = et1.getText().toString();
-        String password = et2.getText().toString();
-
-        LoginBLL loginBLL = new LoginBLL();
-
-        StrictModeClass.StrictMode();
-        if (loginBLL.checkUser(username, password)) {
-            Intent intent = new Intent(LiquorWear.this, DashActivity.class);
-            startActivity(intent);
-            finish();
-            Toast.makeText(this, url.token, Toast.LENGTH_SHORT).show();
-
-        } else {
-            Toast.makeText(this, "Either username or password is incorrect", Toast.LENGTH_SHORT).show();
-            et1.requestFocus();
-
-        }
-    }
 
 }

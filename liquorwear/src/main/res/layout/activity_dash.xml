@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.wear.widget.BoxInsetLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/orange"
     android:layout_height="match_parent"
     tools:context=".DashActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:text="List of Product: 30"
+       android:textStyle="bold"
+       android:textSize="15sp"
+       android:layout_marginBottom="20dp"
+       android:padding="16dp" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="List of Category: 7"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:layout_marginBottom="20dp"
+        android:padding="16dp" />
+
+</androidx.wear.widget.BoxInsetLayout>
